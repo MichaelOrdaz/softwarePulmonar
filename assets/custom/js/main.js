@@ -5,7 +5,7 @@ $(function(){
 		ev.preventDefault();
 
 		var valores = $(this).serializeArray();
-		console.log(valores);
+		//console.log(valores);
 		var power = getPoderMecanico( valores[0].value, valores[1].value, valores[2].value, valores[3].value, valores[4].value, valores[5].value );
 
 		if(power >= 12){
