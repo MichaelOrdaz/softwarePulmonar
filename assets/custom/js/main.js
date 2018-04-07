@@ -8,16 +8,26 @@ $(function(){
 		//console.log(valores);
 		var power = getPoderMecanico( valores[0].value, valores[1].value, valores[2].value, valores[3].value, valores[4].value, valores[5].value );
 
-		if(power >= 12){
-			swal("Poder Mecanico Peligroso!!", "nivel mecanico de "+ power, "error");
+		if(power > 13){
+			swal("Zona de Riesgo!!", "nivel mecanico de "+ power, "error");
 			alertify.error("Poder Mecanico Peligroso!!");
 
 		}
-		else if(power < 12){
+		else if(power <= 13){
 			swal("Poder Mecanico Estable!!", "nivel mecanico de "+ power, "success");
 			alertify.success("Poder Mecanico Estable!!");
 
 		}
+
+		document.querySelector("#formPoderMecanico").reset();
+
+		var html = "<b>Frecuencia Respiratoria:</b> " + valores[1].value + "<br>"
+		+ "<b>Volumen Tidal</b> " + valores[2].value + " <br>"
+		+ "<b>Presión Pico</b> " + valores[3].value + " <br>"
+		+ "<b>Meseta</b> " + valores[4].value + " <br>"
+		+ "<b>PEEP</b> " + valores[5].value + " <br>";
+		
+		$("#datosIngresados").html(html);
 
 	});
 
@@ -34,7 +44,7 @@ $(function(){
 	    data: {
 	        labels: ["Poder Mecanico", "Blue", "Yellow", "Green"],
 	        datasets: [{
-	            label: 'Ventilación Humana',
+	            label: 'Ventilación Mecanica',
 	            data: [result, 19, 3, 5],
 	            backgroundColor: [
 	                'rgba(255, 99, 132, 0.2)',
