@@ -16,7 +16,7 @@
 </header>
 <!-- /header -->
 <section>
-	<article class="welcome">
+	<article id="carusel">
 		<a href="vista/datosPeso" class="btn btn-primary btn-lg d-none d-sm-block">Examinar Ventilación</a>
 		<a href="vista/datosPeso" class="btn btn-primary btn-sm d-block d-sm-none ">Examinar Ventilación</a>
 	</article>
@@ -35,6 +35,21 @@
 
 <script src="assets/jquery/jquery-3.3.1.min.js" ></script>
 <script src="assets/bootstrap/js/bootstrap.min.js" ></script>
-
+<script>
+	var carusel = function(){
+		if(i == 2){
+			i = 0;
+		}
+		var album = ['welcome', 'welcome2'];
+		var nodo = document.querySelector('#carusel');
+		nodo.className = album[i];
+		i++;
+	}
+	var i = 0;
+	document.querySelector('#carusel').className = "welcome2";
+	window.onload = function(){
+		var timer = setInterval(carusel, 1000*10)
+	};
+</script>
 </body>
 </html>

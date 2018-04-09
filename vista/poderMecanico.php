@@ -4,12 +4,12 @@
 	<meta charset="UTF-8">
 	<title>Ventilación Segura</title>
 	<meta name="descripcion" content="Sistema para capturar datos de pacientes conectados y verificar sus signos vitales">
-	<link rel="shortcut icon" href="assets/img/favicon3.png">
+	<link rel="shortcut icon" href="../assets/img/favicon3.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="assets/alertify/css/alertify.min.css">
-	<link rel="stylesheet" type="text/css" href="assets/alertify/css/themes/bootstrap.min.css">
-	<link rel="stylesheet" href="assets/custom/css/stylesheet.css">
+	<link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/alertify/css/alertify.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/alertify/css/themes/bootstrap.min.css">
+	<link rel="stylesheet" href="../assets/custom/css/stylesheet.css">
 	
 </head>
 <body>
@@ -67,12 +67,12 @@
 </div>
 
 
-<script src="assets/jquery/jquery-3.3.1.min.js"></script>
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="assets/swal/swalalert.js"></script>
-<script src="assets/alertify/alertify.min.js"></script>
-<script src="assets/Chartjs/Chart.bundle.min.js"></script>
-<script src="assets/custom/js/main.js"></script>
+<script src="../assets/jquery/jquery-3.3.1.min.js"></script>
+<script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../assets/swal/swalalert.js"></script>
+<script src="../assets/alertify/alertify.min.js"></script>
+<script src="../assets/Chartjs/Chart.bundle.min.js"></script>
+<script src="../assets/custom/js/main.js"></script>
 
 
 </body>

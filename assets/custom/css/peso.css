@@ -1,3 +1,6 @@
+html, body{
+	background: linear-gradient(45deg, #E7E7E7, #fff);
+}
 header{
 	height: 3rem;
 	position: absolute;
@@ -7,8 +10,13 @@ header{
 	color: #fff;
 	width: 100vw;
 	text-align: center;
-	line-height: 3;
+	font-size: 2rem;
 }
+
+body>.container{
+	margin-top: 3.5rem; 
+}
+
 footer{
 	position: fixed;
 	bottom: 0;

@@ -1,3 +1,6 @@
+html, body{
+	background: linear-gradient(45deg, #E7E7E7, #fff);
+}
 header{
 	height: 3rem;
 	position: absolute;
@@ -19,10 +22,20 @@ header{
 	border-radius: 6px;
 	box-shadow: 0 0 4px black;
 }
-.welcome a{
+.welcome2{
+	position: relative;
+	background: url("../../img/welcome2.jpg");
+	height: 60vh;
+	margin: 3rem auto;
+	background-repeat: no-repeat;
+	background-size: cover;
+	border-radius: 6px;
+	box-shadow: 0 0 4px black;
+}
+#carusel a{
 	position: absolute;
 	top: 48%;
-	left: 45%;
+	left: 40%;
 }
 
 
