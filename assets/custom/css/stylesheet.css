@@ -1,6 +1,12 @@
 html, body{
 	background: linear-gradient(45deg, #E7E7E7, #fff);
 }
+html{
+	position: relative;
+}
+body{
+	margin-bottom: 4rem;
+}
 header{
 	height: 3rem;
 	position: absolute;
@@ -46,7 +52,7 @@ article:last-child{
 }
 
 footer{
-	position: fixed;
+	position: absolute;
 	bottom: 0;
 	left: 0;
 	height: 2rem;

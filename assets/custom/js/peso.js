@@ -21,8 +21,13 @@ $(function(){
 			dataType: 'json',
 			data: datos,
 			beforeSend: function(){
-				console.log("esperando");
-				swal("Espere por favor");
+				swal({
+				  title: 'Espere por favor',
+				  onOpen: () => {
+				    swal.showLoading()
+				  },
+				  allowOutsideClick: false
+				})
 			}
 		}).done(function(json){
 			//console.log("success");

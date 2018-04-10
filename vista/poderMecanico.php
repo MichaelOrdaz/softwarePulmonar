@@ -9,10 +9,13 @@
 	<link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="../assets/alertify/css/alertify.min.css">
 	<link rel="stylesheet" type="text/css" href="../assets/alertify/css/themes/bootstrap.min.css">
-	<link rel="stylesheet" href="../assets/custom/css/stylesheet.css">
+	<link rel="stylesheet" href="../assets/custom/css/poderMecanico.css">
 	
 </head>
 <body>
+<header>
+	Datos de Paciente
+</header>
 <div class="container">
 	<div class="row justify-content-center">
 		<div class="col-auto">
@@ -20,6 +23,14 @@
 		</div>
 	</div>
 	<div class="row">
+		<div class="col-3">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</div>
 		<div class="col">
 			<form action="#" method="GET" accept-charset="utf-8" role="formulario" id="formPoderMecanico">
 				<div class="form-group">
@@ -56,7 +67,7 @@
 
 			</form>
 		</div>
-		<div class="col">
+		<div class="col-4">
 			<h4>Signos ingresados</h4>
 			<div id="datosIngresados">
 				
@@ -65,6 +76,9 @@
 		</div>
 	</div>
 </div>
+<footer>
+	&copy; 2018 Dr. Carlos Larios Todos lo derehos Reservados 
+</footer>
 
 
 <script src="../assets/jquery/jquery-3.3.1.min.js"></script>

@@ -16,17 +16,15 @@ header{
 	color: #fff;
 	width: 100vw;
 	text-align: center;
-	font-size: 2rem;
+	line-height: 3;
 }
-
 body>.container{
 	margin-top: 3.5rem; 
 }
-
 footer{
 	position: absolute;
 	bottom: 0;
-	laeft: 0;
+	left: 0;
 	height: 2rem;
 	background: #2354F2;
 	width: 100vw;
