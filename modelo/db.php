@@ -2,6 +2,7 @@
 /**
  * Class db
  */
+require_once "autoload.php"; 
 
 abstract class DB{
 	private static $h = "localhost";
@@ -40,59 +41,7 @@ abstract class DB{
 	}
 
 }
-
-/**
-* 
-*/
-class Paciente extends DB{
-	
-	protected $id_paciente;
-	//public $nombre;
-	public $peso;
-	public $estatura;
-	public $genero;
-	public $frecuenciaRespiratoria;
-	public $vt;
-	public $presionPico;
-	public $presionMeseta;
-	public $peep;
-	public $poderMecanico;
-	public $fio2;
-	
-	
-	public function set(){
-		$this->sql = "INSERT INTO ventilacion.pacientes(peso, estatura, genero) VALUES ( ?, ?, ? )";
-		$this->runQuery( [$this->peso, $this->estatura, $this->genero] );
-	}
-	public function get($id=""){
-		if( $id == "" ){}
-		else if($id == "all"){
-			$this->sql = "SELECT * FROM ventilacion.pacientes WHERE status = 1";
-			$this->runQuery();
-			return $this->data;
-		}
-		else{
-			$this->sql = "SELECT * FROM ventilacion.pacientes WHERE id_paciente = ? AND status = 1";
-			$this->runQuery([$id]);
-			return $this->data;
-		}
-	}
-	public function delete($id = ""){
-		if( $id !="" ){
-			$this->sql = "UPDATE ventilacion.pacientes SET status = 0 WHERE id_paciente = ?";
-			$this->runQuery([$id]);
-		}
-	}
-	public function update($id = ""){
-		if( $id != "" ){
-			$this->sql = "UPDATE ventilacion.pacientes SET frecuenciaRespiratoria = ?, vt = ?, presionPico = ?, presionMeseta = ?, peep = ? WHERE id_paciente = ? AND status = 1";
-			$this->runQuery( [ $this->frecuenciaRespiratoria, $this->vt, $this->presionPico, $this->presionMeseta, $this->peep, $id ] );
-		}	
-	}
-
-	
-}
-
+/*
 $paciente = new Paciente();
 $paciente->peso = 68;
 $paciente->estatura = 170;
@@ -108,6 +57,6 @@ $paciente->presionMeseta = 15;
 $paciente->peep = 4;
 
 $paciente->update(1);
-
+*/
 
 ?>
