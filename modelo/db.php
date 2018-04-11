@@ -29,14 +29,22 @@ abstract class DB{
 
 	private function close(){
 		$this->pdo = null;
-		$this->sth = null;
 	}
 
 	protected function runQuery( $param = array() ){
 		$this->start();
 		$sth = $this->pdo->prepare($this->sql);
 		$sth->execute($param);
-		$this->data = $sth->fetchAll(PDO::FETCH_OBJ);
+		if( preg_match('/^SELECT/', $this->sql) ){
+			$this->data = $sth->fetchAll(PDO::FETCH_OBJ);
+		}
+		else if( preg_match('/^INSERT/', $this->sql) ){
+			$this->data = $this->pdo->lastInsertId();
+		}
+		else{
+			$this->data = $sth->rowCount();
+		}
+		$sth = null;
 		$this->close();
 	}
 

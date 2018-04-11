@@ -32,3 +32,10 @@ footer{
 	line-height: 2;
 	color: #fff;
 }
+
+#btnNext{
+	position: fixed;
+	right: 2.5rem;
+	bottom: 2.5rem;
+	box-shadow: 0 0 5px 0 black;
+}

@@ -31,7 +31,10 @@ $(function(){
 			}
 		}).done(function(json){
 			//console.log("success");
-			window.location.href = "poderMecanico";
+			swal.close();
+			setTimeout(()=>{
+				window.location.href = "poderMecanico";
+			}, 1000);
 		}).fail(function() {
 			//console.log("error");
 		});
