@@ -49,7 +49,7 @@
 </section>
 
 <footer>
-	&copy; 2018 Dr. Larios Todos lo derehos Reservados 
+	&copy; 2018 Dr. Larios Todos los derechos Reservados 
 </footer>
 
 <script src="../assets/jquery/jquery-3.3.1.min.js"></script>

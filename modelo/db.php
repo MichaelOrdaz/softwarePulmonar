@@ -5,10 +5,18 @@
 require_once "autoload.php"; 
 
 abstract class DB{
+	/*
+	private static $h = "localhost";
+	private static $u = "michaelo_1";
+	private static $p = "%some_pass2018";
+	protected $dbName = "michaelo_ventilacion";
+	*/
+
 	private static $h = "localhost";
 	private static $u = "root";
 	private static $p = "";
 	protected $dbName = "ventilacion";
+	
 	protected $pdo;//objeto pdostatement
 	protected $sql;//sql
 	protected $data = array();//valores devueltos

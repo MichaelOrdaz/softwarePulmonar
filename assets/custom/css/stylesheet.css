@@ -3,7 +3,7 @@ html, body{
 }
 html{
 	position: relative;
-	min-width: 100vh;
+	height: 100vh;
 }
 body{
 	margin-bottom: 4rem;

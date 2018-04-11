@@ -1,5 +1,72 @@
+var ctx = document.querySelector("#myGraf");
+var myChart;
 $(function(){
 	$('[data-toggle="tooltip"]').tooltip();
+
+//evento del peep
+	$('#peep').change((ev)=>{
+		var valor = $('#peep').val();
+		//console.log( valor );
+		if( valor < 5 ){
+			alertify.error('No se recomienda PEEP menor de 5cmH2O');
+			$("#formPoderMecanico :submit").prop('disabled', true);
+			$('#peep').parent().children('div.alert').text('No se recomienda PEEP menor de 5cmH2O, por favor aumenta el PEEP');
+			$('#peep').parent().children('div.alert').slideDown();
+		}
+		else{
+			$("#formPoderMecanico :submit").prop('disabled', false);
+			$('#peep').parent().children('div.alert').empty();
+			$('#peep').parent().children('div.alert').slideUp();
+		}
+	});
+
+	//evento del volumen tidal
+	$('#vt').change((ev)=>{
+		var vt = $('#vt').val();
+		var predicho = document.querySelector('#prevData #pesoPredicho').textContent;
+		predicho = parseFloat(predicho);
+		vt = parseFloat(vt);
+
+		var result = (vt/predicho);
+		result = result.toFixed(2);
+		console.log(result);
+		
+		if( result > 9 ){
+			alertify.error('Volumen riesgoso ' + result + "ml/Kg");
+			$("#formPoderMecanico :submit").prop('disabled', true);
+			$('#mlkg').text(result+"ml/Kg");
+			$('#mlkg').addClass('bg-warning');
+			$('#mlkg').removeClass('bg-info');
+			$('#vt').parent().children('div.alert').text('Volumen riesgoso ' + result + "ml/Kg. Por favor disminuya el volumen tidal");
+			$('#vt').parent().children('div.alert').slideDown();
+		}
+		else{
+			$("#formPoderMecanico :submit").prop('disabled', false);
+			$('#mlkg').text(result + "ml/Kg");
+			$('#mlkg').removeClass('bg-warning');
+			$('#mlkg').addClass('bg-info');
+			$('#vt').parent().children('div.alert').empty();
+			$('#vt').parent().children('div.alert').slideUp();
+		}
+		$('#mlkg').fadeOut();
+		$('#mlkg').fadeIn();
+
+	});
+
+	$('#meseta').change((ev)=>{
+		var valor = $('#meseta').val();
+		if( valor > 30 ){
+			alertify.error('Presión Meseta excesiva por riesgo de lesión pulmonar inducida por ventilador, por favor reducirla');
+			$("#formPoderMecanico :submit").prop('disabled', true);
+			$('#meseta').parent().children('div.alert').text('Presión Meseta excesiva por riesgo de lesión pulmonar inducida por ventilador, por favor reducirla');
+			$('#meseta').parent().children('div.alert').slideDown();
+		}
+		else{
+			$("#formPoderMecanico :submit").prop('disabled', false);
+			$('#meseta').parent().children('div.alert').empty();
+			$('#meseta').parent().children('div.alert').slideUp();
+		}
+	});
 //ajax que rescata los datos y calcula el IMC
 	$.ajax({
 		url: '../modelo/Peticiones',
@@ -10,6 +77,7 @@ $(function(){
 		//console.log("success");
 		var paciente = json[0];
 		var imc = calcularIMC(paciente.peso, paciente.estatura);
+		var pesoPredicho = calcularPesoPredicho(paciente.estatura, paciente.genero);
 		
 		//console.log(imc);
 		var aviso, colorIMC, contorno;
@@ -41,32 +109,32 @@ $(function(){
 			'<p><b>Sexo: </b>'+ (paciente.genero == 'h' ? 'Masculino':'Femenino') + '</p>'+
 			'<p><b>IMC: </b><span id="imc">'+ imc + '</span></p>'+
 			'<p><b>Clasificación de IMC: </b>'+ aviso + '</p>'+
+			'<p><b>Peso Predicho: </b><span id="pesoPredicho">'+ pesoPredicho + '</span></p>'+
+			"<p class='p-1 rounded font-weight-bold text-center' id='mlkg' style='display: none;'> </p>";
 		'</div>';
 		$('#prevData').html(info);
 
-
-		var ctx = document.querySelector("#myGraf");
-		var myChart = new Chart(ctx, {
+		myChart = new Chart(ctx, {
 	    type: 'bar',
 	    data: {
-	        labels: ["Poder Mecanico", "IMC"],
+	        labels: ["IMC"],
 	        datasets: [{
-	            label: '',
-	            data: [0, imc],
+	            label: '#',
+	            data: [imc],
 	            backgroundColor: [
-	                'rgba(255, 99, 132, 0.2)',
-	                //'rgba(54, 162, 235, 0.2)'
 	            	colorIMC
 	            ],
 	            borderColor: [
-	                'rgba(255,99,132,1)',
-	                //'rgba(54, 162, 235, 1)'
 	            	contorno
 	            ],
 	            borderWidth: 1
 	        }]
 	    },
 	    options: {
+	    	title: {
+            	display: true,
+            	text: 'Ventilación Mecánica'
+        	},
 	        scales: {
 	            yAxes: [{
 	                ticks: {
@@ -82,21 +150,14 @@ $(function(){
 		//console.log("error");
 	});
 
-
-
-
 	$('#formPoderMecanico').submit(function(ev){
 		ev.preventDefault();
-
 		var valores = $(this).serializeArray();
-		//console.log(valores);
 		var power = getPoderMecanico( valores[0].value, valores[1].value, valores[2].value, valores[3].value, valores[4].value, valores[5].value );
 
 		valores.push({name: 'fn', value: 'paso2'}); 
 		valores.push({name: 'poderMecanico', value: power});
-		//console.log(valores);
 
-		
 		$.ajax({
 		url: '../modelo/Peticiones',
 		type: 'POST',
@@ -108,16 +169,9 @@ $(function(){
 		}).done(function(json){
 			//console.log("success");
 			$("#formPoderMecanico :submit").prop('disabled', false);
-				console.log("Todo correcto");
-			/*if(json.filas > 0){
-			}	
-			else{
-			}*/
-				//swal("Upss!!", "Lo sentimos tuvimos un error, por favor intenta nuevamente", 'error');
-
+			console.log("Todo correcto");
 		}).fail(function() {
 			console.log("error");
-		
 		});
 
 		if(power > 13){
@@ -137,14 +191,15 @@ $(function(){
 		+ "<b>Volumen Tidal</b> " + valores[2].value + " <br>"
 		+ "<b>Presión Pico</b> " + valores[3].value + " <br>"
 		+ "<b>Meseta</b> " + valores[4].value + " <br>"
-		+ "<b>PEEP</b> " + valores[5].value + " <br>";
+		+ "<b>PEEP</b> " + valores[5].value + " <br>"
+		+ "<p class='bg-secondary rounded p-1 text-white'><b>PODER MECÁNICO</b> " + power + " </p><br>";
 		
 		$("#datosIngresados").html(html);
 
 
-	});
+	});//ENd Submit
 
-});
+});//End DocumentReady
 
 var calcularIMC = function(peso, altura){
 	var pesoKg = parseFloat(peso);
@@ -152,7 +207,17 @@ var calcularIMC = function(peso, altura){
 	var imc = ( pesoKg / Math.pow(alturaMts, 2) );
 	return imc.toFixed(2);
 }
-
+var calcularPesoPredicho = function(talla, sexo){
+	var tallacm = parseFloat(talla);
+	//(Talla en cm – 152.4) x 0.91 sumando al resultado por ser mujer 45.5 y si es hombre 50
+	if( sexo == 'm' ){
+		var result = ( ( tallacm - 152.4) * 0.91 ) + 45.5;
+	}
+	else if(sexo == 'h'){
+		var result = ( ( tallacm - 152.4) * 0.91 ) + 50;
+	}
+	return result.toFixed(2);
+}
 //calcular el poder mecanico
 var getPoderMecanico = function(cmAgua, fr, vt, pico, meseta, peep){
 		//0.098 * 25 * 500 * [ 34 - ( (30-5)/2 ) ]
@@ -172,67 +237,12 @@ var getPoderMecanico = function(cmAgua, fr, vt, pico, meseta, peep){
 			colorPM = 'rgba(245, 87, 87, .2)';
 			contornoPM = 'red';	
 		}
-
-
-		var imc = $('#imc').text();
-		imc = parseFloat(imc);
-		console.log(imc);
-		var aviso, colorIMC, contorno;
-		if( imc < 18 ){
-			aviso = "Peso Bajo";
-			colorIMC = 'rgba(245, 87, 87, .2)';
-			contorno = 'red';	
-		}
-		else if( imc >= 18 && imc <=24.9 ){
-			aviso = "Normal";
-			colorIMC = 'rgba(86, 87, 246, .2)';
-			contorno = 'blue';	
-		}
-		else if( imc >= 25 && imc <=26.9 ){
-			aviso = "Sobrepeso";
-			colorIMC = 'rgba(241, 247, 38, .2)';
-			contorno = 'yellow';	
-		}
-		else if( imc >= 27 ){
-			aviso = "Obesidad";
-			colorIMC = 'rgba(245, 87, 87, .2)';	
-			contorno = 'red';	
-		}
-
-
-		var ctx = document.querySelector("#myGraf");
-		var myChart = new Chart(ctx, {
-	    type: 'bar',
-	    data: {
-	        labels: ["Poder Mecanico", "IMC"],
-	        datasets: [{
-	            label: '',
-	            data: [result, imc],
-	            backgroundColor: [
-	                //'rgba(255, 99, 132, 0.2)',
-	                //'rgba(54, 162, 235, 0.2)'
-	            	colorPM,
-	            	colorIMC
-	            ],
-	            borderColor: [
-	                //'rgba(255,99,132,1)',
-	                //'rgba(54, 162, 235, 1)'
-	            	contornoPM,
-	            	contorno
-	            ],
-	            borderWidth: 1
-	        }]
-	    },
-	    options: {
-	        scales: {
-	            yAxes: [{
-	                ticks: {
-	                    beginAtZero:true
-	                }
-	            }]
-	        }
-	    }
-	});
-
-	return parseInt( result );
+		//actualizo CHartJS
+		myChart.data.labels[1] = 'Poder Mecanico';
+	    myChart.data.datasets[0].data[1] = result;
+	    myChart.data.datasets[0].backgroundColor[1] = colorPM;
+	    myChart.data.datasets[0].borderColor[1] = contornoPM;
+	    myChart.update();
+	
+	return result;
 }

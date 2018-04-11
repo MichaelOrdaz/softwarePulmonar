@@ -17,7 +17,7 @@
 	Datos de Paciente
 </header>
 <div class="container">
-	<div class="row justify-content-center">
+	<div class="mb-5 row justify-content-center">
 		<div class="col-auto">
 			<h1>Ventilación Segura</h1>
 		</div>
@@ -40,6 +40,7 @@
 				<div class="form-group">
 					<label for="vt">Volumen Tidal</label>
 					<input type="text" name="vt" id="vt" class="form-control" required />
+					<div class="alert alert-warning my-1" style="display: none;"></div>
 					<small class="form-text text-muted">ejemplo 500</small>
 				</div>
 				<div class="form-group">
@@ -48,13 +49,15 @@
 					<small class="form-text text-muted">ejemplo 26 ó 34</small>
 				</div>
 				<div class="form-group">
-					<label for="meseta">Presion Meseta</label>
+					<label for="meseta">Presión Meseta</label>
 					<input type="text" name="meseta" id="meseta" class="form-control" required />
+					<div class="alert alert-warning my-1" style="display: none;"></div>
 					<small class="form-text text-muted">ejemplo 30</small>
 				</div>
 				<div class="form-group">
 					<label for="peep"> PEEP </label>
 					<input type="text" name="peep" id="peep" class="form-control" required />
+					<div class="alert alert-warning my-1" style="display: none;"></div>
 					<small class="form-text text-muted">ejemplo 5</small>
 				</div>
 
@@ -71,9 +74,9 @@
 		</div>
 	</div>
 </div>
-<a class="btn btn-primary rounded-circle" href="#" id="btnNext" data-toggle="tooltip" title="Siguiente Paso"> <i class="fas fa-arrow-circle-right"></i> </a>
+<a class="btn btn-dark rounded-circle btn-lg" href="#" id="btnNext" data-toggle="tooltip" title="Siguiente Paso"> <i class="fas fa-arrow-circle-right"></i> </a>
 <footer>
-	&copy; 2018 Dr. Carlos Larios Todos lo derehos Reservados 
+	&copy; 2018 Dr. Carlos Larios Todos los derechos Reservados
 </footer>
 
 

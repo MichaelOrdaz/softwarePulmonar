@@ -20,33 +20,33 @@ class Paciente extends DB{
 	
 	
 	public function set(){
-		$this->sql = "INSERT INTO ventilacion.pacientes(peso, estatura, genero) VALUES ( ?, ?, ? )";
+		$this->sql = "INSERT INTO pacientes(peso, estatura, genero) VALUES ( ?, ?, ? )";
 		$this->runQuery( [$this->peso, $this->estatura, $this->genero] );
 		return $this->data;
 	}
 	public function get($id=""){
 		if( $id == "" ){}
 		else if($id == "all"){
-			$this->sql = "SELECT * FROM ventilacion.pacientes WHERE status = 1";
+			$this->sql = "SELECT * FROM pacientes WHERE status = 1";
 			$this->runQuery();
 			return $this->data;
 		}
 		else{
-			$this->sql = "SELECT * FROM ventilacion.pacientes WHERE id_paciente = ? AND status = 1";
+			$this->sql = "SELECT * FROM pacientes WHERE id_paciente = ? AND status = 1";
 			$this->runQuery([$id]);
 			return $this->data;
 		}
 	}
 	public function delete($id = ""){
 		if( $id !="" ){
-			$this->sql = "UPDATE ventilacion.pacientes SET status = 0 WHERE id_paciente = ?";
+			$this->sql = "UPDATE pacientes SET status = 0 WHERE id_paciente = ?";
 			$this->runQuery([$id]);
 			return $this->data;
 		}
 	}
 	public function update($id = ""){
 		if( $id != "" ){
-			$this->sql = "UPDATE ventilacion.pacientes SET frecuenciaRespiratoria = ?, vt = ?, presionPico = ?, presionMeseta = ?, peep = ?, poderMecanico = ? WHERE id_paciente = ? AND status = 1";
+			$this->sql = "UPDATE pacientes SET frecuenciaRespiratoria = ?, vt = ?, presionPico = ?, presionMeseta = ?, peep = ?, poderMecanico = ? WHERE id_paciente = ? AND status = 1";
 			$this->runQuery( [ $this->frecuenciaRespiratoria, $this->vt, $this->presionPico, $this->presionMeseta, $this->peep, $this->poderMecanico, $id ] );
 			return $this->data;
 		}
