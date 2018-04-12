@@ -6,7 +6,7 @@ html{
 	min-height: 100vh;
 }
 body{
-	margin-bottom: 4rem;
+	margin: 0 0 4rem 0;
 }
 header{
 	height: 3rem;
@@ -27,10 +27,10 @@ body>.container{
 footer{
 	position: absolute;
 	bottom: 0;
-	laeft: 0;
+	left: 0;
 	height: 2rem;
 	background: #2354F2;
-	width: 100vw;
+	min-width: 100vw;
 	text-align: center;
 	line-height: 2;
 	color: #fff;

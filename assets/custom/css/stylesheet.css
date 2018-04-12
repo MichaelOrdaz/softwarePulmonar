@@ -3,10 +3,10 @@ html, body{
 }
 html{
 	position: relative;
-	height: 100vh;
+	min-height: 100vh;
 }
 body{
-	margin-bottom: 4rem;
+	margin: 0 0 4rem 0;
 }
 header{
 	height: 3rem;
@@ -16,7 +16,6 @@ header{
 	background: #2354F2;
 	color: #fff;
 	width: 100vw;
-	text-align: center;
 	line-height: 3;
 }
 .welcome{

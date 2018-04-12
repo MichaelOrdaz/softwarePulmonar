@@ -6,7 +6,7 @@ html{
 	min-height: 100vh;
 }
 body{
-	margin-bottom: 4rem;
+	margin: 0 0 4rem 0;
 }
 header{
 	height: 3rem;
@@ -28,7 +28,7 @@ footer{
 	left: 0;
 	height: 2rem;
 	background: #2354F2;
-	width: 100vw;
+	min-width: 100vw;
 	text-align: center;
 	line-height: 2;
 	color: #fff;
@@ -38,12 +38,14 @@ footer{
 }
 
 #btnNext{
+	border-radius: 50%;
+	z-index: 100;
 	position: fixed;
-	right: 3rem;
+	right: 1.5rem;
 	bottom: 3rem;
 	box-shadow: 0 0 6px 0 black;
 	transition: transform 1s;
 }
 #btnNext:hover{
-	transform: scale(1.4);
+	transform: scale(1.2);
 }

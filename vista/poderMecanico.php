@@ -13,7 +13,7 @@
 	
 </head>
 <body>
-<header>
+<header class="d-flex justify-content-center">
 	Datos de Paciente
 </header>
 <div class="container">
@@ -23,41 +23,72 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-3" id="prevData">
+		<div class="col-8 offset-2 col-sm-3 offset-sm-0" id="prevData">
 			
 		</div>
-		<div class="col">
+		<div class="col-10 offset-1 col-sm offset-sm-0">
 			<form action="#" method="GET" accept-charset="utf-8" role="formulario" id="formPoderMecanico">
 				<div class="form-group">
 					<label for="consagua">Constante:</label>
-					<input type="text" name="const" class="form-control" value="0.098" id="consagua" readonly>
+					<div class="input-group">
+						<input type="text" name="const" class="form-control" value="0.098" id="consagua" readonly>
+						<div class="input-group-append">
+					    	<span class="input-group-text">ml</span>
+					  	</div>
+					</div>
 				</div>
 				<div class="form-group">
 					<label for="fr">Frecuencia Respiratoria</label>
-					<input type="text" name="fr" id="fr" class="form-control" required />
+					<div class="input-group">
+						<input type="text" name="fr" id="fr" class="form-control" required />
+						<div class="input-group-append">
+					    	<span class="input-group-text">rate</span>
+					  	</div>	
+					</div>	
 					<small class="form-text text-muted">ejemplo 17 ó 25</small>
 				</div>
 				<div class="form-group">
 					<label for="vt">Volumen Tidal</label>
-					<input type="text" name="vt" id="vt" class="form-control" required />
-					<div class="alert alert-warning my-1" style="display: none;"></div>
+					<div class="input-group">
+						<input type="text" name="vt" id="vt" class="form-control" required />
+						<div class="input-group-append">
+					    	<span class="input-group-text">ml/Kg</span>
+					  	</div>
+						<div class="alert alert-warning my-1" style="display: none;"></div>
+					</div>
 					<small class="form-text text-muted">ejemplo 500</small>
 				</div>
 				<div class="form-group">
 					<label for="pico">Presión Pico</label>
-					<input type="text" name="pico" id="pico" class="form-control" required />
+					<div class="input-group">	
+						<input type="text" name="pico" id="pico" class="form-control" required />
+						<div class="input-group-append">
+					    	<span class="input-group-text">medida</span>
+					  	</div>
+						<div class="alert alert-warning my-1" style="display: none;"></div>
+					</div>
 					<small class="form-text text-muted">ejemplo 26 ó 34</small>
 				</div>
 				<div class="form-group">
 					<label for="meseta">Presión Meseta</label>
-					<input type="text" name="meseta" id="meseta" class="form-control" required />
-					<div class="alert alert-warning my-1" style="display: none;"></div>
+					<div class="input-group">
+						<input type="text" name="meseta" id="meseta" class="form-control" required />
+						<div class="input-group-append">
+					    	<span class="input-group-text">medida</span>
+					  	</div>
+						<div class="alert alert-warning my-1" style="display: none;"></div>
+					</div>
 					<small class="form-text text-muted">ejemplo 30</small>
 				</div>
 				<div class="form-group">
 					<label for="peep"> PEEP </label>
-					<input type="text" name="peep" id="peep" class="form-control" required />
-					<div class="alert alert-warning my-1" style="display: none;"></div>
+					<div class="input-group">
+						<input type="text" name="peep" id="peep" class="form-control" required />
+						<div class="input-group-append">
+					    	<span class="input-group-text">medida</span>
+					  	</div>
+						<div class="alert alert-warning my-1" style="display: none;"></div>
+					</div>
 					<small class="form-text text-muted">ejemplo 5</small>
 				</div>
 
@@ -65,20 +96,18 @@
 
 			</form>
 		</div>
-		<div class="col-4">
+		<div class="col-8 offset-2 col-sm-4 offset-sm-0">
 			<h4>Signos ingresados</h4>
-			<div id="datosIngresados">
-				
-			</div>
-			<canvas width="" height="" id="myGraf" > </canvas>
+			<div id="datosIngresados"></div>
+			<canvas width="" height="350" id="myGraf" class="border" > </canvas>
 		</div>
 	</div>
 </div>
-<a class="btn btn-dark rounded-circle btn-lg" href="#" id="btnNext" data-toggle="tooltip" title="Siguiente Paso"> <i class="fas fa-arrow-circle-right"></i> </a>
-<footer>
+<div class="clearfix"></div>
+<a class="btn btn-dark btn-lg" href="#" id="btnNext" data-toggle="tooltip" title="Siguiente Paso"> <i class="fas fa-arrow-circle-right"></i></a>
+<footer class="d-flex justify-content-center">
 	&copy; 2018 Dr. Carlos Larios Todos los derechos Reservados
 </footer>
-
 
 <script src="../assets/jquery/jquery-3.3.1.min.js"></script>
 <script src="../assets/popover/popover.js"></script>
@@ -88,7 +117,5 @@
 <script src="../assets/alertify/alertify.min.js"></script>
 <script src="../assets/Chartjs/Chart.bundle.min.js"></script>
 <script src="../assets/custom/js/main.js"></script>
-
-
 </body>
 </html>

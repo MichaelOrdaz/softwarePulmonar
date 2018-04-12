@@ -13,7 +13,7 @@
 	
 </head>
 <body>
-<header>
+<header class="d-flex justify-content-center">
 	Datos de Paciente
 </header>
 <!-- /header -->
@@ -48,7 +48,7 @@
 	</article>
 </section>
 
-<footer>
+<footer class="d-flex justify-content-center">
 	&copy; 2018 Dr. Larios Todos los derechos Reservados 
 </footer>
 

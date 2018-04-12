@@ -67,6 +67,21 @@ $(function(){
 			$('#meseta').parent().children('div.alert').slideUp();
 		}
 	});
+
+	$('#pico').change((ev)=>{
+		var valor = $('#pico').val();
+		if( valor > 35 ){
+			alertify.error('Verificar problemas de resistencia o flujo inspiratorio excesivo');
+			$("#formPoderMecanico :submit").prop('disabled', true);
+			$('#pico').parent().children('div.alert').text('Verificar problemas de resistencia o flujo inspiratorio excesivo');
+			$('#pico').parent().children('div.alert').slideDown();
+		}
+		else{
+			$("#formPoderMecanico :submit").prop('disabled', false);
+			$('#pico').parent().children('div.alert').empty();
+			$('#pico').parent().children('div.alert').slideUp();
+		}
+	});
 //ajax que rescata los datos y calcula el IMC
 	$.ajax({
 		url: '../modelo/Peticiones',
