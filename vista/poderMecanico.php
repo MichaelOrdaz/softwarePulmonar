@@ -104,7 +104,7 @@
 	</div>
 </div>
 <div class="clearfix"></div>
-<a class="btn btn-dark btn-lg" href="#" id="btnNext" data-toggle="tooltip" title="Siguiente Paso"> <i class="fas fa-arrow-circle-right"></i></a>
+<a class="btn btn-dark btn-lg" href="javascript://" onclick="redirect()" id="btnNext" data-toggle="tooltip" title="Siguiente Paso"> <i class="fas fa-arrow-circle-right"></i></a>
 <footer class="d-flex justify-content-center">
 	&copy; 2018 Dr. Carlos Larios Todos los derechos Reservados
 </footer>

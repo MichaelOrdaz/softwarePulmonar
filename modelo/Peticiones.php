@@ -20,9 +20,14 @@ function paso1($post){
 
 function getPaciente($post){
 	session_start();
-	$id = $_SESSION['id'];
-	$paciente = new Paciente();
-	$data = $paciente->get($id);
+	if( isset( $_SESSION['id'] ) ){
+		$id = $_SESSION['id'];
+		$paciente = new Paciente();
+		$data = $paciente->get($id);
+	}
+	else{
+		$data = array('status'=>'0');
+	}
 	return $data;
 }
 

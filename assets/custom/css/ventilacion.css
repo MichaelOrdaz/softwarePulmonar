@@ -1,0 +1,31 @@
+html, body{
+	background: linear-gradient(45deg, #E7E7E7, #fff);
+}
+html{
+	position: relative;
+	min-height: 100vh;
+}
+body{
+	margin: 4rem 0 4rem 0;
+}
+header{
+	height: 3rem;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: #2354F2;
+	color: #fff;
+	width: 100vw;
+	line-height: 3;
+}
+footer{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 2rem;
+	background: #2354F2;
+	width: 100vw;
+	text-align: center;
+	line-height: 2;
+	color: #fff;
+}

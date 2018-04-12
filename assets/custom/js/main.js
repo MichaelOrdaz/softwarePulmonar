@@ -90,6 +90,12 @@ $(function(){
 		data: {fn: 'getPaciente'}
 	}).done(function(json){
 		//console.log("success");
+		//console.log( typeof json[0] );
+		
+		if( typeof json[0] === 'undefined'  ){
+			window.location.href = "../index";
+		}
+
 		var paciente = json[0];
 		var imc = calcularIMC(paciente.peso, paciente.estatura);
 		var pesoPredicho = calcularPesoPredicho(paciente.estatura, paciente.genero);
@@ -260,4 +266,23 @@ var getPoderMecanico = function(cmAgua, fr, vt, pico, meseta, peep){
 	    myChart.update();
 	
 	return result;
+}
+
+var redirect = function(){
+	$.ajax({
+		url: '../modelo/Peticiones',
+		type: 'POST',
+		dataType: 'json',
+		data: {fn: 'getPaciente'}
+	}).done(function(json){
+
+		if(json[0].poderMecanico != 0){
+			window.location.href = "ventilacion";
+		}
+		else{
+			alertify.message('Llene el formulario por favor');
+		}
+
+	});
+
 }
