@@ -4,7 +4,7 @@
 */
 require_once "autoload.php"; 
 class Paciente extends DB{
-	
+	/*
 	protected $id_paciente;
 	//public $nombre;
 	public $peso;
@@ -17,6 +17,7 @@ class Paciente extends DB{
 	public $peep;
 	public $poderMecanico;
 	public $fio2;
+	*/
 	
 	
 	public function set(){
@@ -51,5 +52,15 @@ class Paciente extends DB{
 			return $this->data;
 		}
 	}
+
+	public function updateFio($id = ""){
+		if( $id != "" ){
+			$this->sql = "UPDATE pacientes SET fio2 = ? WHERE id_paciente = ? AND status = 1";
+			$this->runQuery( [ $this->fio2, $id ] );
+			return $this->data;
+		}
+	}
+
+
 }
 ?>

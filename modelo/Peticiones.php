@@ -43,7 +43,17 @@ function paso2($post){
 	$paciente->peep = $post['peep'];
 	$paciente->poderMecanico = $post['poderMecanico'];
 	$affec = $paciente->update( $_SESSION['id'] );
-	return  array('filas' => $affec );;
+	return array('filas' => $affec );
+}
+
+function saveFio($post){
+	session_start();
+
+	$paciente = new Paciente();
+	$paciente->fio2 = $post['fio2'];
+	$affec = $paciente->updateFio( $_SESSION['id'] );
+	return array('filas'=> $affec);
+	
 }
 
 $data = $fn($_POST);
