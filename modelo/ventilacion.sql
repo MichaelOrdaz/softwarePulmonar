@@ -19,3 +19,30 @@ create table pacientes(
 	status tinyint not null default 1,
 	PRIMARY KEY (id_paciente)
 )engine=innodb, charset=utf8;
+
+
+
+create database empresa;
+use empresa;
+
+create table empleados(
+	id int not null auto_increment,
+	num_empleado int not null,
+	fecha_cambio datetime not null,
+	area_cambio varchar(50) not null,
+	PRIMARY KEY (id)
+)engine=innodb, charset=utf8;
+
+insert into empleados values
+(default, 1, '2018-12-10', 'area1'),
+(default, 1, '2017-10-12', 'area8'),
+(default, 1, '2016-12-10', 'area6'),
+(default, 2, '2018-05-24', 'area2'),
+(default, 2, '2015-11-28', 'area4'),
+(default, 3, '2016-05-05', 'area7'),
+(default, 3, '2018-01-20', 'area5'),
+(default, 4, '2017-09-03', 'area5'),
+(default, 4, '2017-10-29', 'area7'),
+(default, 4, '2018-12-10', 'area6');
+
+select * from empleados t1 where fecha_cambio = ( select max(fecha_cambio) from empleados t2 where t1.num_empleado=t2.num_empleado);
