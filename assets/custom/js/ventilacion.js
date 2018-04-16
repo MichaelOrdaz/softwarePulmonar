@@ -1,6 +1,7 @@
 var myChart;
 
 $(function(){
+	$('[data-toggle="tooltip"]').tooltip();
 	//verificamos que exista sesion
 	$.ajax({
 		url: '../modelo/Peticiones',
@@ -13,7 +14,6 @@ $(function(){
 		}
 	});
 
-
 	var ctx = document.querySelector("#radarPaciente");
 	var myChart = new Chart(ctx, {
     	type: 'radar',
@@ -23,12 +23,13 @@ $(function(){
 		    	label: "Recomendado",
 		        data: [13, 60, 9, 15, 35, 30, 5],
 		        backgroundColor: [
-	            	'rgba(64, 192, 8, 0)'
+	            	'transparent'
 	            ],
 	            borderColor: [
-	            	'rgba(64, 192, 8, 1)'
+	            	'rgba(0, 255, 0, 1)'
 	            ],
-	            borderWidth: 1
+	            borderWidth: 1,
+	            radius: 6
 		    }]
 		},
     	options: {
@@ -48,36 +49,150 @@ $(function(){
 		ev.preventDefault();
 		var data = $('#form-fio2').serializeArray();
 		data.push({name: 'fn', value: 'saveFio'});
-		console.log(data);
-
+		//console.log(data);
 		$.ajax({
 		url: '../modelo/Peticiones',
 		type: 'POST',
 		dataType: 'json',
-		data: data
+		data: data,
+		beforeSend: function(){
+			swal({
+		  		title: 'Espere por favor',
+		  		onOpen: () => {
+		    	swal.showLoading()
+		  	},
+		  	allowOutsideClick: false
+			})
+		}
 		}).done(function(json){
-			console.log("success");
-			console.log(json);
+			//console.log("success");
+			//console.log(json);
 			if( json.filas > 0 ){
-
 				$.ajax({
 				url: '../modelo/Peticiones',
 				type: 'POST',
 				dataType: 'json',
 				data: {'fn': 'getPaciente'}
-				}).done(function(json){
+				}).done(function(resp){
 					//aqui debo de rescatar todo y hacer todas las operaciones.
+					//console.log(resp);
+					var poderMecanico = resp[0].poderMecanico;
+					var fio2 = resp[0].fio2;
+					var tidal= resp[0].vt2;
+					var driving = (resp[0].presionMeseta - resp[0].peep);
+					var pico = resp[0].presionPico;
+					var presionMeseta = resp[0].presionMeseta;
+					var peep = resp[0].peep;
+
+					var radarPaciente = {
+				    	label: "Paciente",
+				        data: [poderMecanico, fio2, tidal, driving, pico, presionMeseta, peep],
+				        backgroundColor: [
+			            	'rgba(0, 0, 200, .2)'
+			            ],
+			            borderColor: [
+			            	'rgba(0, 0, 255, 1)'
+			            ],
+			            borderWidth: 1,
+			            radius: 2
+					}
+				    myChart.data.datasets[1] = radarPaciente;
+				    myChart.update();
+					
+				    var table = '<table class="table table-sm table-bordered my-3">'+
+						'<tbody>'+
+							'<tr>'+
+								'<th>Poder Mecánico</th>'+
+								'<td>'+poderMecanico+'</td>'+
+								'<th>FIO2</th>'+
+								'<td>'+ fio2 +'</td>'+
+								'<th>Volumen Tidal</th>'+
+								'<td>'+tidal+'</td>'+
+							'</tr>'+
+							'<tr>'+
+								'<th>Driving Pressure</th>'+
+								'<td>'+driving+'</td>'+
+								'<th>Presión Pico</th>'+
+								'<td>'+pico+'</td>'+
+								'<th>Presión Meseta</th>'+
+								'<td>'+presionMeseta+'</td>'+
+							'</tr>'+
+							'<tr>'+
+								'<th>PEEP</th>'+
+								'<td>'+peep+'</td>'+
+							'</tr>'+
+						'</tbody>'+
+					'</table>';
+
+					$('#tablaDatos').empty();
+					$('#tablaDatos').html(table);
+
+					swal.close();
 
 				}).fail(function() {
-					console.log("error");
-				
+					console.log("error ajax interno");
+					swal.close();
+					swal('Upps!', 'Lo sentimos ocurrio un error, intenta nuevamente, gracias', 'error');	
 				});
 			}
-
 		}).fail(function() {
-			console.log("error");
+			swal.close();
+			swal('Upps!', 'Lo sentimos ocurrio un error, intenta nuevamente, gracias', 'error');
+			console.log("error ajax externo");
 		});
 	});//endSubmit
 	
+
+	$('#v-pills-profile-tab').click(ev=>{
+
+		$.ajax({
+		url: '../modelo/Peticiones',
+		type: 'POST',
+		dataType: 'json',
+		data: {'fn': 'getAllPacientes'}
+		}).done(function(resp){
+			console.log(resp);
+			$('#tableHistory tbody').empty();
+			
+			if ( $.fn.dataTable.isDataTable( '#tableHistory' ) ) {
+				$('#tableHistory').DataTable().destroy();
+			}
+			
+			var body = "";
+			resp.forEach(pac=>{
+				body += '<tr>'
+					+'<td>'+pac.peso+'</td>'
+					+'<td>'+pac.estatura+'</td>'
+					+'<td>'+pac.genero+'</td>'
+					+'<td>'+pac.frecuenciaRespiratoria+'</td>'
+					+'<td>'+pac.vt+'</td>'
+					+'<td>'+pac.presionPico+'</td>'
+					+'<td>'+pac.presionMeseta+'</td>'
+					+'<td>'+pac.peep+'</td>'
+					+'<td>'+pac.fio2+'</td>'
+					+'<td>'+pac.poderMecanico+'</td>'
+					+'<td>'+pac.vt2+'</td>'
+					+'<td>'+pac.create_at+'</td>'
+				+'</tr>';
+			});
+
+			$('#tableHistory tbody').html(body);
+			
+			$('#tableHistory').DataTable({
+				"language": {
+                	"url": "../assets/DataTables/Spanish.json"
+            	},
+        		"order": [[ 11, "desc" ]]
+    		});
+
+
+
+		}).fail(function() {
+			console.log("error");
+			swal('Upps!', 'Lo sentimos ocurrio un error, intenta nuevamente, gracias', 'error');	
+		});
+
+
+	});
 
 });

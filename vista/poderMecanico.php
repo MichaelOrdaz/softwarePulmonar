@@ -13,8 +13,15 @@
 	
 </head>
 <body>
-<header class="d-flex justify-content-center">
-	Datos de Paciente
+<header class="container-fluid">
+	<div class="row">
+		<div class="col-1">
+			<a href="datosPeso" title="Nuevo Reporte" data-toggle="tooltip" class="btn btn-light btn-sm">+</a>
+		</div>
+		<div class="col">
+			<h5>Vista General del Paciente</h5>
+		</div>
+	</div>
 </header>
 <div class="container">
 	<div class="mb-5 row justify-content-center">
@@ -28,6 +35,7 @@
 		</div>
 		<div class="col-10 offset-1 col-sm offset-sm-0">
 			<form action="#" method="GET" accept-charset="utf-8" role="formulario" id="formPoderMecanico">
+				<input type="hidden" name="vt2" id="vt2" />
 				<div class="form-group">
 					<label for="consagua">Constante:</label>
 					<div class="input-group">

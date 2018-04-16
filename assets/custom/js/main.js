@@ -51,6 +51,7 @@ $(function(){
 		$('#mlkg').fadeOut();
 		$('#mlkg').fadeIn();
 
+		$('#vt2').val(result);
 	});
 
 	$('#meseta').change((ev)=>{
@@ -176,7 +177,7 @@ $(function(){
 		var valores = $(this).serializeArray();
 		var power = getPoderMecanico( valores[0].value, valores[1].value, valores[2].value, valores[3].value, valores[4].value, valores[5].value );
 
-		valores.push({name: 'fn', value: 'paso2'}); 
+		valores.push({name: 'fn', value: 'paso2'});
 		valores.push({name: 'poderMecanico', value: power});
 
 		$.ajax({

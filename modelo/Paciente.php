@@ -47,8 +47,8 @@ class Paciente extends DB{
 	}
 	public function update($id = ""){
 		if( $id != "" ){
-			$this->sql = "UPDATE pacientes SET frecuenciaRespiratoria = ?, vt = ?, presionPico = ?, presionMeseta = ?, peep = ?, poderMecanico = ? WHERE id_paciente = ? AND status = 1";
-			$this->runQuery( [ $this->frecuenciaRespiratoria, $this->vt, $this->presionPico, $this->presionMeseta, $this->peep, $this->poderMecanico, $id ] );
+			$this->sql = "UPDATE pacientes SET frecuenciaRespiratoria = ?, vt = ?, presionPico = ?, presionMeseta = ?, peep = ?, poderMecanico = ?, vt2 = ? WHERE id_paciente = ? AND status = 1";
+			$this->runQuery( [ $this->frecuenciaRespiratoria, $this->vt, $this->presionPico, $this->presionMeseta, $this->peep, $this->poderMecanico, $this->vt2, $id ] );
 			return $this->data;
 		}
 	}

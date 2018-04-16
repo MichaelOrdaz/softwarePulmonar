@@ -16,6 +16,7 @@ create table pacientes(
 	peep smallint not null default 0,
 	fio2 float(8,2) not null default 0,
 	poderMecanico float(8,2) not null default 0,
+	vt2 decimal(6,2) not null default 0,
 	status tinyint not null default 1,
 	PRIMARY KEY (id_paciente)
 )engine=innodb, charset=utf8;

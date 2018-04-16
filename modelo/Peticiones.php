@@ -31,6 +31,13 @@ function getPaciente($post){
 	return $data;
 }
 
+function getAllPacientes($post){
+	session_start();
+	$paciente = new Paciente();
+	$data = $paciente->get('all');
+	return $data;
+}
+
 function paso2($post){
 
 	session_start();
@@ -42,6 +49,7 @@ function paso2($post){
 	$paciente->presionMeseta = $post['meseta'];
 	$paciente->peep = $post['peep'];
 	$paciente->poderMecanico = $post['poderMecanico'];
+	$paciente->vt2 = $post['vt2'];
 	$affec = $paciente->update( $_SESSION['id'] );
 	return array('filas' => $affec );
 }
