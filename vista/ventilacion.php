@@ -42,16 +42,24 @@
 						Para terminar con el reporte del paciente por favor ingrese el <b>FIO2</b>
 					</p>
 					<form action="#" method="GET" accept-charset="utf-8" role="formulario" id="form-fio2">
+						
 						<div class="form-group">
 							<label for="fio2">FIO2</label>
-							<input type="number" name="fio2" class="form-control" id="fio2" placeholder="Ingresa el FIo2" min="21" max="60" step="0.01" required />
+							<div class="input-group">
+								<input type="number" name="fio2" class="form-control" id="fio2" placeholder="Ingresa el FIo2" min="21" max="100" step="0.01" required />
+								<div class="input-group-append">
+							    	<span class="input-group-text">%</span>
+							  	</div>	
+							</div>
+							<div class="alert alert-warning my-1" style="display: none;"></div>
 						</div>
+
 						<button type="submit" class="btn btn-primary btn-block">Reporte</button>
 					</form>
 					<div id="tablaDatos">
 						
 					</div>
-					<canvas class="border" width="" height="" id="radarPaciente"></canvas>
+					<canvas width="" height="" id="radarPaciente"></canvas>
 				</div>
 		      
 		      </div>

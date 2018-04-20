@@ -17,6 +17,7 @@ create table pacientes(
 	fio2 float(8,2) not null default 0,
 	poderMecanico float(8,2) not null default 0,
 	vt2 decimal(6,2) not null default 0,
+	create_at timestamp default current_timestamp,
 	status tinyint not null default 1,
 	PRIMARY KEY (id_paciente)
 )engine=innodb, charset=utf8;

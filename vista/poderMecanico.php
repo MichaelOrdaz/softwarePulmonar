@@ -35,7 +35,7 @@
 		</div>
 		<div class="col-10 offset-1 col-sm offset-sm-0">
 			<form action="#" method="GET" accept-charset="utf-8" role="formulario" id="formPoderMecanico">
-				<input type="hidden" name="vt2" id="vt2" />
+				
 				<div class="form-group">
 					<label for="consagua">Constante:</label>
 					<div class="input-group">
@@ -62,8 +62,8 @@
 						<div class="input-group-append">
 					    	<span class="input-group-text">ml/Kg</span>
 					  	</div>
-						<div class="alert alert-warning my-1" style="display: none;"></div>
 					</div>
+					<div class="alert alert-warning my-1" style="display: none;"></div>
 					<small class="form-text text-muted">ejemplo 500</small>
 				</div>
 				<div class="form-group">
@@ -73,8 +73,8 @@
 						<div class="input-group-append">
 					    	<span class="input-group-text">medida</span>
 					  	</div>
-						<div class="alert alert-warning my-1" style="display: none;"></div>
 					</div>
+					<div class="alert alert-warning my-1" style="display: none;"></div>
 					<small class="form-text text-muted">ejemplo 26 ó 34</small>
 				</div>
 				<div class="form-group">
@@ -84,8 +84,8 @@
 						<div class="input-group-append">
 					    	<span class="input-group-text">medida</span>
 					  	</div>
-						<div class="alert alert-warning my-1" style="display: none;"></div>
 					</div>
+					<div class="alert alert-warning my-1" style="display: none;"></div>
 					<small class="form-text text-muted">ejemplo 30</small>
 				</div>
 				<div class="form-group">
@@ -95,11 +95,11 @@
 						<div class="input-group-append">
 					    	<span class="input-group-text">medida</span>
 					  	</div>
-						<div class="alert alert-warning my-1" style="display: none;"></div>
 					</div>
+					<div class="alert alert-warning my-1" style="display: none;"></div>
 					<small class="form-text text-muted">ejemplo 5</small>
 				</div>
-
+				<input type="hidden" name="vt2" id="vt2" />
 				<button type="submit" class="btn btn-primary btn-block">Graficar</button>
 
 			</form>

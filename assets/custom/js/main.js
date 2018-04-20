@@ -9,14 +9,14 @@ $(function(){
 		//console.log( valor );
 		if( valor < 5 ){
 			alertify.error('No se recomienda PEEP menor de 5cmH2O');
-			$("#formPoderMecanico :submit").prop('disabled', true);
-			$('#peep').parent().children('div.alert').text('No se recomienda PEEP menor de 5cmH2O, por favor aumenta el PEEP');
-			$('#peep').parent().children('div.alert').slideDown();
+			//$("#formPoderMecanico :submit").prop('disabled', true);
+			$('#peep').parent().siblings('div.alert').text('No se recomienda PEEP menor de 5cmH2O');
+			$('#peep').parent().siblings('div.alert').slideDown();
 		}
 		else{
-			$("#formPoderMecanico :submit").prop('disabled', false);
-			$('#peep').parent().children('div.alert').empty();
-			$('#peep').parent().children('div.alert').slideUp();
+			//$("#formPoderMecanico :submit").prop('disabled', false);
+			$('#peep').parent().siblings('div.alert').empty();
+			$('#peep').parent().siblings('div.alert').slideUp();
 		}
 	});
 
@@ -31,22 +31,22 @@ $(function(){
 		result = result.toFixed(2);
 		console.log(result);
 		
-		if( result > 9 ){
+		if( result > 8 ){
 			alertify.error('Volumen riesgoso ' + result + "ml/Kg");
-			$("#formPoderMecanico :submit").prop('disabled', true);
+			//$("#formPoderMecanico :submit").prop('disabled', true);
 			$('#mlkg').text(result+"ml/Kg");
 			$('#mlkg').addClass('bg-warning');
 			$('#mlkg').removeClass('bg-info');
-			$('#vt').parent().children('div.alert').text('Volumen riesgoso ' + result + "ml/Kg. Por favor disminuya el volumen tidal");
-			$('#vt').parent().children('div.alert').slideDown();
+			$('#vt').parent().siblings('div.alert').text('Volumen riesgoso ' + result + "ml/Kg.");
+			$('#vt').parent().siblings('div.alert').slideDown();
 		}
 		else{
-			$("#formPoderMecanico :submit").prop('disabled', false);
+			//$("#formPoderMecanico :submit").prop('disabled', false);
 			$('#mlkg').text(result + "ml/Kg");
 			$('#mlkg').removeClass('bg-warning');
 			$('#mlkg').addClass('bg-info');
-			$('#vt').parent().children('div.alert').empty();
-			$('#vt').parent().children('div.alert').slideUp();
+			$('#vt').parent().siblings('div.alert').empty();
+			$('#vt').parent().siblings('div.alert').slideUp();
 		}
 		$('#mlkg').fadeOut();
 		$('#mlkg').fadeIn();
@@ -57,15 +57,15 @@ $(function(){
 	$('#meseta').change((ev)=>{
 		var valor = $('#meseta').val();
 		if( valor > 30 ){
-			alertify.error('Presión Meseta excesiva por riesgo de lesión pulmonar inducida por ventilador, por favor reducirla');
-			$("#formPoderMecanico :submit").prop('disabled', true);
-			$('#meseta').parent().children('div.alert').text('Presión Meseta excesiva por riesgo de lesión pulmonar inducida por ventilador, por favor reducirla');
-			$('#meseta').parent().children('div.alert').slideDown();
+			alertify.error('Presión Meseta excesiva por riesgo de lesión pulmonar inducida por ventilador');
+			//$("#formPoderMecanico :submit").prop('disabled', true);
+			$('#meseta').parent().siblings('div.alert').text('Presión Meseta excesiva por riesgo de lesión pulmonar inducida por ventilador, por favor reducirla');
+			$('#meseta').parent().siblings('div.alert').slideDown();
 		}
 		else{
-			$("#formPoderMecanico :submit").prop('disabled', false);
-			$('#meseta').parent().children('div.alert').empty();
-			$('#meseta').parent().children('div.alert').slideUp();
+			//$("#formPoderMecanico :submit").prop('disabled', false);
+			$('#meseta').parent().siblings('div.alert').empty();
+			$('#meseta').parent().siblings('div.alert').slideUp();
 		}
 	});
 
@@ -73,14 +73,14 @@ $(function(){
 		var valor = $('#pico').val();
 		if( valor > 35 ){
 			alertify.error('Verificar problemas de resistencia o flujo inspiratorio excesivo');
-			$("#formPoderMecanico :submit").prop('disabled', true);
-			$('#pico').parent().children('div.alert').text('Verificar problemas de resistencia o flujo inspiratorio excesivo');
-			$('#pico').parent().children('div.alert').slideDown();
+			//$("#formPoderMecanico :submit").prop('disabled', true);
+			$('#pico').parent().siblings('div.alert').text('Verificar problemas de resistencia o flujo inspiratorio excesivo');
+			$('#pico').parent().siblings('div.alert').slideDown();
 		}
 		else{
-			$("#formPoderMecanico :submit").prop('disabled', false);
-			$('#pico').parent().children('div.alert').empty();
-			$('#pico').parent().children('div.alert').slideUp();
+			//$("#formPoderMecanico :submit").prop('disabled', false);
+			$('#pico').parent().siblings('div.alert').empty();
+			$('#pico').parent().siblings('div.alert').slideUp();
 		}
 	});
 //ajax que rescata los datos y calcula el IMC
@@ -176,6 +176,10 @@ $(function(){
 		ev.preventDefault();
 		var valores = $(this).serializeArray();
 		var power = getPoderMecanico( valores[0].value, valores[1].value, valores[2].value, valores[3].value, valores[4].value, valores[5].value );
+		console.log(valores);
+		console.log("power", power);
+
+		//console.log(valores);
 
 		valores.push({name: 'fn', value: 'paso2'});
 		valores.push({name: 'poderMecanico', value: power});
@@ -197,7 +201,7 @@ $(function(){
 		});
 
 		if(power > 13){
-			swal("Zona de Riesgo!!", "Nivel mecánico de "+ power, "error");
+			swal("Zona de Riesgo!!", "Nivel mecánico de "+ power, "warning");
 			alertify.error("Poder Mecánico Riesgoso!!");
 
 		}
@@ -208,6 +212,7 @@ $(function(){
 		}
 
 		document.querySelector("#formPoderMecanico").reset();
+		$('#formPoderMecanico div.alert').slideUp();
 
 		var html = "<b>Frecuencia Respiratoria:</b> " + valores[1].value + "<br>"
 		+ "<b>Volumen Tidal</b> " + valores[2].value + " <br>"
@@ -247,6 +252,7 @@ var getPoderMecanico = function(cmAgua, fr, vt, pico, meseta, peep){
 		parte1 = pico - parte1;
 		var parte2 = (fr * vt) / 1000;
 		var result = cmAgua * parte2 * parte1;
+		
 		result = result.toFixed(2);
 
 		result = result <= 0 ? 0:result;
@@ -265,6 +271,7 @@ var getPoderMecanico = function(cmAgua, fr, vt, pico, meseta, peep){
 	    myChart.data.datasets[0].backgroundColor[1] = colorPM;
 	    myChart.data.datasets[0].borderColor[1] = contornoPM;
 	    myChart.update();
+	    
 	
 	return result;
 }

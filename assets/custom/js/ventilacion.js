@@ -20,13 +20,25 @@ $(function(){
     	data: {
 		    labels: ['Poder Mecánico', 'FiO2', 'Volumen Tidal', 'Driving Pressure', 'Presión Pico', 'Presión Meseta', 'PEEP'],
 		    datasets: [{
-		    	label: "Recomendado",
-		        data: [13, 60, 9, 15, 35, 30, 5],
+		    	label: "Limite Min Recomendado",
+		        data: [13, 21, 8, 15, 35, 29, 5],
 		        backgroundColor: [
 	            	'transparent'
 	            ],
 	            borderColor: [
 	            	'rgba(0, 255, 0, 1)'
+	            ],
+	            borderWidth: 1,
+	            radius: 6
+		    },
+		    {
+		    	label: "Limite Max Recomendado",
+		        data: [13, 60, 8, 15, 35, 29, 5],
+		        backgroundColor: [
+	            	'transparent'
+	            ],
+	            borderColor: [
+	            	'rgba(0, 0, 255, 1)'
 	            ],
 	            borderWidth: 1,
 	            radius: 6
@@ -42,6 +54,22 @@ $(function(){
 		        display: true
 		    }
     	}
+	});
+
+	$('#fio2').change((ev)=>{
+		var valor = $('#fio2').val();
+		//console.log( valor );
+		if( valor > 60 ){
+			alertify.error('Fracción inspirada alta');
+			//$("#formPoderMecanico :submit").prop('disabled', true);
+			$('#fio2').parent().siblings('div.alert').text('Fracción inspirada alta');
+			$('#fio2').parent().siblings('div.alert').slideDown();
+		}
+		else{
+			//$("#formPoderMecanico :submit").prop('disabled', false);
+			$('#fio2').parent().siblings('div.alert').empty();
+			$('#fio2').parent().siblings('div.alert').slideUp();
+		}
 	});
 
 
@@ -88,15 +116,15 @@ $(function(){
 				    	label: "Paciente",
 				        data: [poderMecanico, fio2, tidal, driving, pico, presionMeseta, peep],
 				        backgroundColor: [
-			            	'rgba(0, 0, 200, .2)'
+			            	'rgba(0, 0, 0, .1)'
 			            ],
 			            borderColor: [
-			            	'rgba(0, 0, 255, 1)'
+			            	'rgba(0, 0, 0, 1)'
 			            ],
 			            borderWidth: 1,
 			            radius: 2
 					}
-				    myChart.data.datasets[1] = radarPaciente;
+				    myChart.data.datasets[2] = radarPaciente;
 				    myChart.update();
 					
 				    var table = '<table class="table table-sm table-bordered my-3">'+
@@ -127,6 +155,8 @@ $(function(){
 					$('#tablaDatos').empty();
 					$('#tablaDatos').html(table);
 
+					document.querySelector("#form-fio2").reset();
+					$("#form-fio2 div.alert").slideUp();
 					swal.close();
 
 				}).fail(function() {
@@ -134,6 +164,10 @@ $(function(){
 					swal.close();
 					swal('Upps!', 'Lo sentimos ocurrio un error, intenta nuevamente, gracias', 'error');	
 				});
+			}
+			else{
+				alertify.message('No se hizo ningún cambio');
+				swal.close();
 			}
 		}).fail(function() {
 			swal.close();

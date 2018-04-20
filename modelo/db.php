@@ -11,7 +11,6 @@ abstract class DB{
 	private static $p = "%some_pass2018";
 	protected $dbName = "michaelo_ventilacion";
 	*/
-
 	private static $h = "localhost";
 	private static $u = "root";
 	private static $p = "";
