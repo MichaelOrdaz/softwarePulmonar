@@ -10,7 +10,6 @@
 	<link rel="stylesheet" type="text/css" href="../assets/alertify/css/alertify.min.css">
 	<link rel="stylesheet" type="text/css" href="../assets/alertify/css/themes/bootstrap.min.css">
 	<link rel="stylesheet" href="../assets/custom/css/peso.css">
-	
 </head>
 <body>
 <header class="d-flex justify-content-center">
@@ -21,13 +20,38 @@
 	<article class="row">
 		<div class="col-8">
 			<form action="#" method="GET" accept-charset="utf-8" role="formulario" id="pesoPredicho">
+				
+				<div class="form-group">
+					<label for="exp">No. Expediente:</label>
+					<div class="input-group">
+						<input type="text" name="exp" class="form-control" id="exp" placeholder="# de Expediente" readonly />
+						<div class="input-group-append">
+					    	<span class="input-group-text">#</span>
+					  	</div>
+					</div>
+				</div>
+
 				<div class="form-group">
 					<label for="peso">Peso en Kg.:</label>
-					<input type="number" name="peso" class="form-control" id="peso" placeholder="Peso del paciente en Kilogramos" min="0" step="0.01" required />
+					<div class="input-group">
+						<input type="number" name="peso" class="form-control" id="peso" placeholder="Peso del paciente en Kilogramos" min="0" step="0.01" required />
+						<div class="input-group-append">
+					    	<span class="input-group-text">Kg</span>
+					  	</div>
+					</div>
 				</div>
+
 				<div class="form-group">
 					<label for="talla">Estatura en cm:</label>
-					<input type="number" name="talla" class="form-control" id="talla" placeholder="Talla del paciente en cm" min="0" required />
+					<div class="input-group">
+						<input type="number" name="talla" class="form-control" id="talla" placeholder="Talla del paciente en cm" min="0" required />
+						<div class="input-group-append">
+					    	<span class="input-group-text">cm</span>
+					  	</div>
+					</div>
+				</div>
+
+				<div class="form-group">
 				</div>
 				<p>Genero</p>
 				<div class="custom-control custom-radio custom-control-inline">
@@ -39,7 +63,7 @@
 				  	<label class="custom-control-label" for="radio2">Mujer</label>
 				</div>
 
-				<button type="submit" class="btn btn-primary btn-block">Siguiente</button>
+				<button type="submit" class="btn btn-dark btn-block">Siguiente</button>
 			</form>
 		</div>
 		<div class="col">

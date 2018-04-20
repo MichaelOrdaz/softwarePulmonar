@@ -54,7 +54,7 @@
 							<div class="alert alert-warning my-1" style="display: none;"></div>
 						</div>
 
-						<button type="submit" class="btn btn-primary btn-block">Reporte</button>
+						<button type="submit" class="btn btn-dark btn-block">Reporte</button>
 					</form>
 					<div id="tablaDatos">
 						
@@ -68,7 +68,7 @@
 		      	<div class="col">
 		      		<h2>Historial</h2>
 	      		
-	      			<table id="tableHistory" class="table table-bordered table-sm">
+	      			<table id="tableHistory" class="table table-bordered table-sm table-dark">
       					<thead>
       						<tr>
       							<th>Peso</th>

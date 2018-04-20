@@ -53,7 +53,6 @@
 					    	<span class="input-group-text">rate</span>
 					  	</div>	
 					</div>	
-					<small class="form-text text-muted">ejemplo 17 ó 25</small>
 				</div>
 				<div class="form-group">
 					<label for="vt">Volumen Tidal</label>
@@ -64,7 +63,6 @@
 					  	</div>
 					</div>
 					<div class="alert alert-warning my-1" style="display: none;"></div>
-					<small class="form-text text-muted">ejemplo 500</small>
 				</div>
 				<div class="form-group">
 					<label for="pico">Presión Pico</label>
@@ -75,7 +73,6 @@
 					  	</div>
 					</div>
 					<div class="alert alert-warning my-1" style="display: none;"></div>
-					<small class="form-text text-muted">ejemplo 26 ó 34</small>
 				</div>
 				<div class="form-group">
 					<label for="meseta">Presión Meseta</label>
@@ -86,7 +83,6 @@
 					  	</div>
 					</div>
 					<div class="alert alert-warning my-1" style="display: none;"></div>
-					<small class="form-text text-muted">ejemplo 30</small>
 				</div>
 				<div class="form-group">
 					<label for="peep"> PEEP </label>
@@ -97,10 +93,9 @@
 					  	</div>
 					</div>
 					<div class="alert alert-warning my-1" style="display: none;"></div>
-					<small class="form-text text-muted">ejemplo 5</small>
 				</div>
 				<input type="hidden" name="vt2" id="vt2" />
-				<button type="submit" class="btn btn-primary btn-block">Graficar</button>
+				<button type="submit" class="btn btn-dark btn-block">Graficar</button>
 
 			</form>
 		</div>
