@@ -6,6 +6,7 @@ use ventilacion;
 create table pacientes(
 	id_paciente int unsigned not null auto_increment,
 	nombre varchar(100) not null default "desconocido",
+	expediente varchar(20) default 'desconocido',
 	peso float(6,2) not null default 0,
 	estatura smallint not null default 0,
 	genero varchar(3) not null default "I",
@@ -21,6 +22,7 @@ create table pacientes(
 	status tinyint not null default 1,
 	PRIMARY KEY (id_paciente)
 )engine=innodb, charset=utf8;
+
 
 
 

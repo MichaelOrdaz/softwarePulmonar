@@ -1,6 +1,25 @@
 var myChart;
 
 $(function(){
+
+/*
+$('#tableExp').DataTable({
+				"language": {
+                	"url": "../assets/DataTables/Spanish.json"
+            	},
+        		responsive: true
+    		});
+
+$('.infoExp').DataTable({
+				"language": {
+                	"url": "../assets/DataTables/Spanish.json"
+            	},
+        		responsive: true
+    		});
+*/
+
+
+
 	$('[data-toggle="tooltip"]').tooltip();
 	//verificamos que exista sesion
 	$.ajax({
@@ -176,16 +195,76 @@ $(function(){
 		});
 	});//endSubmit
 	
-
+	//tab de historial
 	$('#v-pills-profile-tab').click(ev=>{
 
 		$.ajax({
 		url: '../modelo/Peticiones',
 		type: 'POST',
 		dataType: 'json',
-		data: {'fn': 'getAllPacientes'}
+		data: {'fn': 'groupByExpediente'}
 		}).done(function(resp){
 			console.log(resp);
+			//limpiamos el tbody
+			$('#tableExp tbody').empty();
+			
+			var divExp = "";
+
+			resp.forEach((pac, index)=>{
+				divExp += '<tr>'+
+					'<td>'+
+						'<div class="accordion">'+
+						  	'<div class="card">'+
+						    	'<div class="card-header">'+
+						      		'<h5 class="mb-0">'+
+						        		'<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse'+index+'" aria-expanded="false" aria-controls="collapse'+index+'">'+
+						          			'No. '+pac.expediente+
+						        		'</button>'+
+						     		 '</h5>'+
+						    	'</div>'+
+						    	'<div id="collapse'+index+'" class="collapse" aria-labelledby="headingFour">'+
+						      		'<div class="card-body">'+
+						      			'<table>'+
+											'<thead>'+
+					      						'<tr>'+
+					      							'<th>Peso</th>'+
+					      							'<th>Estatura</th>'+
+					      							'<th>Genero</th>'+
+					      							'<th>F. Respiratoria</th>'+
+					      							'<th>V. Tidal</th>'+
+					      							'<th>P. Pico</th>'+
+					      							'<th>P. Meseta</th>'+
+					      							'<th>PEEP</th>'+
+					      							'<th>FiO2</th>'+
+					      							'<th>Poder Mecánico</th>'+
+					      							'<th>V. Tidal ml/Kg</th>'+
+					      							'<th>Fecha</th>'+
+					      						'</tr>'+
+					      					'</thead>'+
+											'<tbody> </tbody>'+
+										'</table>'+
+						      		'</div>'+
+						    	'</div>'+
+						  	'</div>'+
+						'</div>'+
+					'</td>'+
+				'</tr>';
+
+
+			});
+
+			
+			$('#tableExp tbody').html(divExp);
+
+			$('#tableExp').DataTable({
+				"language": {
+                	"url": "../assets/DataTables/Spanish.json"
+            	},
+        		responsive: true
+    		});
+
+    		addClickCollapse();
+			/*
 			$('#tableHistory tbody').empty();
 			
 			if ( $.fn.dataTable.isDataTable( '#tableHistory' ) ) {
@@ -216,8 +295,10 @@ $(function(){
 				"language": {
                 	"url": "../assets/DataTables/Spanish.json"
             	},
-        		"order": [[ 11, "desc" ]]
+        		"order": [[ 11, "desc" ]],
+        		responsive: true
     		});
+    		*/
 
 
 
@@ -230,3 +311,10 @@ $(function(){
 	});
 
 });
+
+var addClickCollapse = function(){
+	$('button.collapsed').click(function(event) {
+		console.log(event.target);
+	});
+
+}

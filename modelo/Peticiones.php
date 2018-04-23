@@ -12,9 +12,17 @@ function paso1($post){
 	$paciente->peso = trim($post['peso'] );
 	$paciente->estatura = trim( $post['talla'] );
 	$paciente->genero = trim( $post['genero'] );
+	$expediente = $post['exp'] == '' ? 'desconocido' : $post['exp'];
+	$paciente->expediente = trim( $expediente );
+
 	$id = $paciente->set();
 	$_SESSION['id'] = $id;
-	return array('id'=>$id);
+	if($id){
+		return array('status'=>1, 'id'=>$id);
+	}
+	else{
+		return array('status'=>0, 'msg'=>'error en la inserción');
+	}
 
 }
 
@@ -31,11 +39,13 @@ function getPaciente($post){
 	return $data;
 }
 
-function getAllPacientes($post){
+function groupByExpediente($post){
+
 	session_start();
 	$paciente = new Paciente();
-	$data = $paciente->get('all');
+	$data = $paciente->groupByExpediente();
 	return $data;
+
 }
 
 function paso2($post){
@@ -63,6 +73,7 @@ function saveFio($post){
 	return array('filas'=> $affec);
 	
 }
+
 
 $data = $fn($_POST);
 echo json_encode($data);

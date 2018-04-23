@@ -66,8 +66,58 @@
 		      <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
 		      	
 		      	<div class="col">
-		      		<h2>Historial</h2>
-	      		
+		      		<h2>Historial por No. de Expediente</h2>
+					
+					<table style="width: 95%" id="tableExp" class="table table-sm">
+						<caption>Expediente de Pacientes</caption>
+						<thead>
+							<tr>
+								<th>Expediente</th>
+							</tr>
+						</thead>
+						<tbody>
+							
+							<tr>
+								<td>
+									<div class="accordion">
+					  	
+									  	<div class="card">
+									    	<div class="card-header">
+									      		<h5 class="mb-0">
+									        		<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+									          			Collapsible Group Item #4
+									        		</button>
+									     		 </h5>
+									    	</div>
+									    	<div id="collapseFour" class="collapse" aria-labelledby="headingFour">
+									      		<div class="card-body">
+													<table>
+														<thead>
+															<tr>
+																<th>header</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>data</td>
+															</tr>
+														</tbody>
+													</table>
+									      		</div>
+									    	</div>
+									  	</div>
+									
+									</div>
+
+								</td>
+							</tr>
+
+						</tbody>
+					</table>
+
+
+		      	<!--
+	      		<div class="table-responsive">
 	      			<table id="tableHistory" class="table table-bordered table-sm table-dark">
       					<thead>
       						<tr>
@@ -104,6 +154,9 @@
       				</table>	
 		      	
 		      	</div>
+		      -->
+
+		      	</div>
 
 		      </div>
 		    </div>
@@ -122,6 +175,8 @@
 <script src="../assets/swal/swalalert.js"></script>
 <script src="../assets/alertify/alertify.min.js"></script>
 <script src="../assets/Chartjs/Chart.bundle.min.js"></script>
+<script src="../assets/fontawesome/js/fontawesome-all.min.js"></script>
+
 <script src="../assets/custom/js/ventilacion.js"></script>
 
 </body>

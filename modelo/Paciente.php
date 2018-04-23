@@ -21,8 +21,8 @@ class Paciente extends DB{
 	
 	
 	public function set(){
-		$this->sql = "INSERT INTO pacientes(peso, estatura, genero) VALUES ( ?, ?, ? )";
-		$this->runQuery( [$this->peso, $this->estatura, $this->genero] );
+		$this->sql = "INSERT INTO pacientes(peso, estatura, genero, expediente) VALUES ( ?, ?, ?, ? )";
+		$this->runQuery( [$this->peso, $this->estatura, $this->genero, $this->expediente] );
 		return $this->data;
 	}
 	public function get($id=""){
@@ -61,6 +61,13 @@ class Paciente extends DB{
 		}
 	}
 
+	public function groupByExpediente(){
+
+		$this->sql = "SELECT expediente FROM pacientes GROUP BY expediente";
+		$this->runQuery();
+		return $this->data;
+
+	}
 
 }
 ?>

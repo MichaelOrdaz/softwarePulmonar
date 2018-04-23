@@ -24,7 +24,7 @@
 				<div class="form-group">
 					<label for="exp">No. Expediente:</label>
 					<div class="input-group">
-						<input type="text" name="exp" class="form-control" id="exp" placeholder="# de Expediente" readonly />
+						<input type="text" name="exp" class="form-control" id="exp" minlength="12" maxlength="12" autofocus placeholder="# de Expediente" />
 						<div class="input-group-append">
 					    	<span class="input-group-text">#</span>
 					  	</div>
