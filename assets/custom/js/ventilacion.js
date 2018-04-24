@@ -207,6 +207,10 @@ $('.infoExp').DataTable({
 			console.log(resp);
 			//limpiamos el tbody
 			$('#tableExp tbody').empty();
+
+			if ( $.fn.dataTable.isDataTable( '#tableExp' ) ) {
+				$('#tableExp').DataTable().destroy();
+			}
 			
 			var divExp = "";
 
@@ -222,7 +226,7 @@ $('.infoExp').DataTable({
 						        		'</button>'+
 						     		 '</h5>'+
 						    	'</div>'+
-						    	'<div id="collapse'+index+'" class="collapse" aria-labelledby="headingFour">'+
+						    	'<div id="collapse'+index+'" class="collapse" data-exp="'+pac.expediente+'" aria-labelledby="headingFour">'+
 						      		'<div class="card-body">'+
 						      			'<table>'+
 											'<thead>'+
@@ -263,7 +267,7 @@ $('.infoExp').DataTable({
         		responsive: true
     		});
 
-    		addClickCollapse();
+    		addShowCollapse();
 			/*
 			$('#tableHistory tbody').empty();
 			
@@ -312,9 +316,63 @@ $('.infoExp').DataTable({
 
 });
 
-var addClickCollapse = function(){
-	$('button.collapsed').click(function(event) {
-		console.log(event.target);
+var addShowCollapse = function(){
+	$('.collapse').on('show.bs.collapse', event=>{
+		//console.log(event);
+		//console.log("Se mostro el collapse");
+		var idCollapse = event.currentTarget.id;
+		var noExp = event.currentTarget.dataset.exp;
+		//console.log(noExp);
+
+		$.ajax({
+		url: '../modelo/Peticiones',
+		type: 'POST',
+		dataType: 'json',
+		data: {'fn': 'rowPaciente', 'expediente': noExp}
+		}).done(function(resp){
+			console.log(resp);
+			
+			$('#'+idCollapse + ' table tbody').empty();
+
+			if ( $.fn.dataTable.isDataTable( '#'+idCollapse + ' table' ) ) {
+				$('#'+idCollapse + ' table').DataTable().destroy();
+			}
+
+			var body = "";
+			resp.data.forEach(pac=>{
+				body += '<tr>'
+					+'<td>'+pac.peso+'</td>'
+					+'<td>'+pac.estatura+'</td>'
+					+'<td>'+pac.genero+'</td>'
+					+'<td>'+pac.frecuenciaRespiratoria+'</td>'
+					+'<td>'+pac.vt+'</td>'
+					+'<td>'+pac.presionPico+'</td>'
+					+'<td>'+pac.presionMeseta+'</td>'
+					+'<td>'+pac.peep+'</td>'
+					+'<td>'+pac.fio2+'</td>'
+					+'<td>'+pac.poderMecanico+'</td>'
+					+'<td>'+pac.vt2+'</td>'
+					+'<td>'+pac.create_at+'</td>'
+				+'</tr>';
+			});
+
+			$('#'+idCollapse + ' table tbody').html(body);
+
+			$('#'+idCollapse + ' table').DataTable({
+				"language": {
+	            	"url": "../assets/DataTables/Spanish.json"
+	        	},
+	    		"order": [[ 11, "desc" ]],
+	    		responsive: true
+			});
+	
+
+		}).fail(function(){
+			console.log("Fallo la ejecucion del ajax");
+		});
+
+		
+
 	});
 
 }

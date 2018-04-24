@@ -48,6 +48,18 @@ function groupByExpediente($post){
 
 }
 
+function rowPaciente($post){
+	session_start();
+	$paciente = new Paciente();
+	$data = $paciente->rowPaciente($post['expediente']);
+	if($data){
+		return array('status'=>1, 'data'=>$data );
+	}
+	else{
+		return array('status'=>0);
+	}
+}
+
 function paso2($post){
 
 	session_start();

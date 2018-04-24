@@ -69,5 +69,13 @@ class Paciente extends DB{
 
 	}
 
+	public function rowPaciente($exp = ""){
+		if( $exp != "" ){
+			$this->sql = "SELECT * FROM pacientes WHERE expediente = ? AND status = 1";
+			$this->runQuery( [$exp] );
+			return $this->data;
+		}
+	}
+
 }
 ?>
