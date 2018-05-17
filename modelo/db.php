@@ -56,22 +56,6 @@ abstract class DB{
 	}
 
 }
-/*
-$paciente = new Paciente();
-$paciente->peso = 68;
-$paciente->estatura = 170;
-$paciente->genero = 'h';
-//$paciente->set();
 
-//var_dump( $paciente->get(5) );
-//$paciente->delete(2);
-$paciente->frecuenciaRespiratoria = 32;
-$paciente->vt = 5;
-$paciente->presionPico = 10;
-$paciente->presionMeseta = 15;
-$paciente->peep = 4;
-
-$paciente->update(1);
-*/
 
 ?>
