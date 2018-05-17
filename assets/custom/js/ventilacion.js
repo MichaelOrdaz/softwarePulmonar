@@ -2,6 +2,24 @@ var myChart;
 
 $(function(){
 
+/*
+$('#tableExp').DataTable({
+				"language": {
+                	"url": "../assets/DataTables/Spanish.json"
+            	},
+        		responsive: true
+    		});
+
+$('.infoExp').DataTable({
+				"language": {
+                	"url": "../assets/DataTables/Spanish.json"
+            	},
+        		responsive: true
+    		});
+*/
+
+
+
 	$('[data-toggle="tooltip"]').tooltip();
 	//verificamos que exista sesion
 	$.ajax({

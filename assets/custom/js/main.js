@@ -207,21 +207,31 @@ $(function(){
 		}
 		else if(power <= 13){
 			swal("Poder Mecánico Estable!!", "Nivel mecánico de "+ power, "success");
-			alertify.success("Poder Mecánico Estable!!");
+			alertify.success("!Poder Mecánico Seguro!");
 
 		}
 
 		document.querySelector("#formPoderMecanico").reset();
 		$('#formPoderMecanico div.alert').slideUp();
-
+		/*
 		var html = "<b>Frecuencia Respiratoria:</b> " + valores[1].value + "<br>"
 		+ "<b>Volumen Tidal</b> " + valores[2].value + " <br>"
 		+ "<b>Presión Pico</b> " + valores[3].value + " <br>"
 		+ "<b>Meseta</b> " + valores[4].value + " <br>"
 		+ "<b>PEEP</b> " + valores[5].value + " <br>"
 		+ "<p class='bg-secondary rounded p-1 text-white'><b>PODER MECÁNICO</b> " + power + " </p><br>";
-		
-		$("#datosIngresados").html(html);
+		*/
+		var tabla = '<table class="table table-hover table-sm">'+
+			'<tbody>'+
+				'<tr> <th> Frecuencia Respiratoria </th> <td> ' + valores[1].value + ' rate </td> </tr>'+
+				'<tr> <th> Volumen Tidal </th> <td> ' + valores[2].value + ' ml </td> </tr>'+
+				'<tr> <th> Presión Pico </th> <td> ' + valores[3].value + ' cmH<sub>2</sub>O </td> </tr>'+
+				'<tr> <th> Presión Meseta </th> <td> ' + valores[4].value + ' cmH<sub>2</sub>O </td> </tr>'+
+				'<tr> <th> PEEP </th> <td> ' + valores[5].value + ' cmH<sub>2</sub>O </td> </tr>'+
+				'<tr> <th> Poder Mecánico </th> <td> ' + power + ' cmH<sub>2</sub>O </td> </tr>'+
+			'</tbody>'+
+		'</table>';
+		$("#datosIngresados").html(tabla);
 
 
 	});//ENd Submit

@@ -50,7 +50,7 @@
 					<div class="input-group">
 						<input type="text" name="fr" id="fr" class="form-control" required />
 						<div class="input-group-append">
-					    	<span class="input-group-text">rate</span>
+					    	<span class="input-group-text">Rate</span>
 					  	</div>	
 					</div>	
 				</div>
@@ -59,7 +59,7 @@
 					<div class="input-group">
 						<input type="text" name="vt" id="vt" class="form-control" required />
 						<div class="input-group-append">
-					    	<span class="input-group-text">ml/Kg</span>
+					    	<span class="input-group-text">ml</span>
 					  	</div>
 					</div>
 					<div class="alert alert-warning my-1" style="display: none;"></div>
@@ -69,7 +69,7 @@
 					<div class="input-group">	
 						<input type="text" name="pico" id="pico" class="form-control" required />
 						<div class="input-group-append">
-					    	<span class="input-group-text">medida</span>
+					    	<span class="input-group-text">cmH<sub>2</sub>O</span>
 					  	</div>
 					</div>
 					<div class="alert alert-warning my-1" style="display: none;"></div>
@@ -79,7 +79,7 @@
 					<div class="input-group">
 						<input type="text" name="meseta" id="meseta" class="form-control" required />
 						<div class="input-group-append">
-					    	<span class="input-group-text">medida</span>
+					    	<span class="input-group-text">cmH<sub>2</sub>O</span>
 					  	</div>
 					</div>
 					<div class="alert alert-warning my-1" style="display: none;"></div>
@@ -89,7 +89,7 @@
 					<div class="input-group">
 						<input type="text" name="peep" id="peep" class="form-control" required />
 						<div class="input-group-append">
-					    	<span class="input-group-text">medida</span>
+					    	<span class="input-group-text">cmH<sub>2</sub>O</span>
 					  	</div>
 					</div>
 					<div class="alert alert-warning my-1" style="display: none;"></div>
@@ -100,9 +100,11 @@
 			</form>
 		</div>
 		<div class="col-8 offset-2 col-sm-4 offset-sm-0">
-			<h4>Signos ingresados</h4>
-			<div id="datosIngresados"></div>
-			<canvas width="" height="350" id="myGraf" class="border" > </canvas>
+			<h4>Parámetros ingresados</h4>
+			<div id="datosIngresados" class="mb-3">
+				<span class="bg-info rounded">Esperando datos..</span>
+			</div>
+			<canvas width="" height="350" id="myGraf" class="border rounded" > </canvas>
 		</div>
 	</div>
 </div>
