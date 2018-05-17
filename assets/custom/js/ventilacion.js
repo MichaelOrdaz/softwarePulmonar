@@ -2,11 +2,15 @@ var myChart;
 
 $(function(){
 
-
+	if(window.location.hash === "#historial"){
+		console.log('mostrar historial');
+		$('#v-pills-profile-tab').tab('show');
+	}
 
 
 	$('[data-toggle="tooltip"]').tooltip();
 	//verificamos que exista sesion
+	/*
 	$.ajax({
 		url: '../modelo/Peticiones',
 		type: 'POST',
@@ -17,6 +21,7 @@ $(function(){
 			window.location.href = "poderMecanico";
 		}
 	});
+	*/
 
 	var ctx = document.querySelector("#radarPaciente");
 	var myChart = new Chart(ctx, {

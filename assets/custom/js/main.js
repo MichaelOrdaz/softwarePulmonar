@@ -92,10 +92,11 @@ $(function(){
 	}).done(function(json){
 		//console.log("success");
 		//console.log( typeof json[0] );
-		
+		/*
 		if( typeof json[0] === 'undefined'  ){
 			window.location.href = "../index";
 		}
+		*/
 
 		var paciente = json[0];
 		var imc = calcularIMC(paciente.peso, paciente.estatura);

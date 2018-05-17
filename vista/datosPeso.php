@@ -12,8 +12,9 @@
 	<link rel="stylesheet" href="../assets/custom/css/peso.css">
 </head>
 <body>
+	<a href="ventilacion#historial" title="Historial" class="btn btn-light" style="transform: scale(.8); position: fixed; bottom: 50px; right: 20px; z-index: 100; box-shadow: 0 0 5px black"> historial </a>
 <header class="d-flex justify-content-center">
-	Datos de Paciente
+	<p>Datos de Paciente</p>
 </header>
 <!-- /header -->
 <section class="container">
