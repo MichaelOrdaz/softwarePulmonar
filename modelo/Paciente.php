@@ -45,6 +45,15 @@ class Paciente extends DB{
 			return $this->data;
 		}
 	}
+
+	public function deleteExpediente($exp = ""){
+		if( $exp !="" ){
+			$this->sql = "UPDATE pacientes SET status = 0 WHERE expediente = ?";
+			$this->runQuery([$exp]);
+			return $this->data;
+		}
+	}
+
 	public function update($id = ""){
 		if( $id != "" ){
 			$this->sql = "UPDATE pacientes SET frecuenciaRespiratoria = ?, vt = ?, presionPico = ?, presionMeseta = ?, peep = ?, poderMecanico = ?, vt2 = ? WHERE id_paciente = ? AND status = 1";
@@ -63,7 +72,7 @@ class Paciente extends DB{
 
 	public function groupByExpediente(){
 
-		$this->sql = "SELECT expediente FROM pacientes GROUP BY expediente";
+		$this->sql = "SELECT expediente FROM pacientes WHERE status = 1 GROUP BY expediente";
 		$this->runQuery();
 		return $this->data;
 

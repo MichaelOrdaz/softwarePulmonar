@@ -86,6 +86,35 @@ function saveFio($post){
 	
 }
 
+function deleteExpediente($post){
+
+	$paciente = new Paciente();
+	$affec = $paciente->deleteExpediente( $post['expediente'] );
+	if($affec > 0 ){
+		return array('status'=>1, 'filas'=> $affec, 'msg'=>'el registro se elimino');
+	}
+	else{
+		return array('status'=>0, 'filas'=> $affec, 'msg'=>'No se encontro el registro');
+	}
+
+
+}
+
+
+function deleteRow($post){
+
+	$paciente = new Paciente();
+	$affec = $paciente->delete( $post['row'] );
+	if($affec > 0 ){
+		return array('status'=>1, 'filas'=> $affec, 'msg'=>'el registro se elimino');
+	}
+	else{
+		return array('status'=>0, 'filas'=> $affec, 'msg'=>'No se encontro el registro');
+	}
+
+}
+
+
 
 $data = $fn($_POST);
 echo json_encode($data);

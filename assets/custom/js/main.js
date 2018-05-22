@@ -84,6 +84,23 @@ $(function(){
 			$('#pico').parent().siblings('div.alert').slideUp();
 		}
 	});
+<<<<<<< HEAD
+=======
+//ajax que rescata los datos y calcula el IMC
+	$.ajax({
+		url: '../modelo/Peticiones',
+		type: 'POST',
+		dataType: 'json',
+		data: {fn: 'getPaciente'}
+	}).done(function(json){
+		//console.log("success");
+		//console.log( typeof json[0] );
+		/*
+		if( typeof json[0] === 'undefined'  ){
+			window.location.href = "../index";
+		}
+		*/
+>>>>>>> 2856935cc2dd4e0534d357b243d0d3937911b1da
 
 /////////////aqui empezaba el ajax
 		//var paciente = json[0];

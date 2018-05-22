@@ -2,26 +2,15 @@ var myChart;
 
 $(function(){
 
-/*
-$('#tableExp').DataTable({
-				"language": {
-                	"url": "../assets/DataTables/Spanish.json"
-            	},
-        		responsive: true
-    		});
-
-$('.infoExp').DataTable({
-				"language": {
-                	"url": "../assets/DataTables/Spanish.json"
-            	},
-        		responsive: true
-    		});
-*/
-
+	if(window.location.hash === "#historial"){
+		console.log('mostrar historial');
+		$('#v-pills-profile-tab').tab('show');
+	}
 
 
 	$('[data-toggle="tooltip"]').tooltip();
 	//verificamos que exista sesion
+	/*
 	$.ajax({
 		url: '../modelo/Peticiones',
 		type: 'POST',
@@ -32,13 +21,19 @@ $('.infoExp').DataTable({
 			window.location.href = "poderMecanico";
 		}
 	});
+	*/
 
 	var ctx = document.querySelector("#radarPaciente");
 	var myChart = new Chart(ctx, {
     	type: 'radar',
     	data: {
 		    labels: ['Poder Mecánico', 'FiO2', 'Volumen Tidal', 'Driving Pressure', 'Presión Pico', 'Presión Meseta'],
+<<<<<<< HEAD
 		    datasets: [{
+=======
+		    datasets: [
+		    /*{
+>>>>>>> 2856935cc2dd4e0534d357b243d0d3937911b1da
 		    	label: "Limite Min Recomendado",
 		        data: [13, 21, 8, 15, 35, 29],
 		        backgroundColor: [
@@ -54,9 +49,15 @@ $('.infoExp').DataTable({
 			    pointBackgroundColor: "rgba(0,100,0,.5)",
 			    pointBorderColor: "rgba(0,200,0,0.6)",
 			    pointHoverRadius: 10
+<<<<<<< HEAD
 		    },
 		    {
 		    	label: "Limite Max Recomendado",
+=======
+		    },*/
+		    {
+		    	label: "Limite Recomendado",
+>>>>>>> 2856935cc2dd4e0534d357b243d0d3937911b1da
 		        data: [13, 60, 8, 15, 35, 29],
 		        backgroundColor: [
 	            	'transparent'
@@ -186,7 +187,11 @@ $('.infoExp').DataTable({
 					    pointBorderColor: "rgba(0,0,0,0.6)",
 					    pointHoverRadius: 10
 					}
+<<<<<<< HEAD
 				    myChart.data.datasets[3] = radarPaciente;
+=======
+				    myChart.data.datasets[2] = radarPaciente;
+>>>>>>> 2856935cc2dd4e0534d357b243d0d3937911b1da
 				    var radarPeep = {
 				    	label: "PEEP Paciente",
 				        data: [peep, peep, peep, peep, peep, peep],
@@ -204,7 +209,11 @@ $('.infoExp').DataTable({
 					    pointBorderColor: "rgba(0,220,200,0.6)",
 					    pointHoverRadius: 4
 					}
+<<<<<<< HEAD
 					myChart.data.datasets[4] = radarPeep;
+=======
+					myChart.data.datasets[3] = radarPeep;
+>>>>>>> 2856935cc2dd4e0534d357b243d0d3937911b1da
 
 
 				    myChart.update();
@@ -287,6 +296,7 @@ $('.infoExp').DataTable({
 						        		'<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse'+index+'" aria-expanded="false" aria-controls="collapse'+index+'">'+
 						          			'No. '+pac.expediente+
 						        		'</button>'+
+						        		'<button class="btn btn-danger btn-sm delete-paciente" type="button" data-exp="'+pac.expediente+'"> <i class="fas fa-times"></i> </button>'+
 						     		 '</h5>'+
 						    	'</div>'+
 						    	'<div id="collapse'+index+'" class="collapse" data-exp="'+pac.expediente+'" aria-labelledby="headingFour">'+
@@ -306,6 +316,7 @@ $('.infoExp').DataTable({
 					      							'<th>Poder Mecánico</th>'+
 					      							'<th>V. Tidal ml/Kg</th>'+
 					      							'<th>Fecha</th>'+
+					      							'<th>Borrar</th>'+
 					      						'</tr>'+
 					      					'</thead>'+
 											'<tbody> </tbody>'+
@@ -323,7 +334,7 @@ $('.infoExp').DataTable({
 			
 			$('#tableExp tbody').html(divExp);
 
-			$('#tableExp').DataTable({
+			var tablaExp = $('#tableExp').DataTable({
 				"language": {
                 	"url": "../assets/DataTables/Spanish.json"
             	},
@@ -331,43 +342,53 @@ $('.infoExp').DataTable({
     		});
 
     		addShowCollapse();
-			/*
-			$('#tableHistory tbody').empty();
-			
-			if ( $.fn.dataTable.isDataTable( '#tableHistory' ) ) {
-				$('#tableHistory').DataTable().destroy();
-			}
-			
-			var body = "";
-			resp.forEach(pac=>{
-				body += '<tr>'
-					+'<td>'+pac.peso+'</td>'
-					+'<td>'+pac.estatura+'</td>'
-					+'<td>'+pac.genero+'</td>'
-					+'<td>'+pac.frecuenciaRespiratoria+'</td>'
-					+'<td>'+pac.vt+'</td>'
-					+'<td>'+pac.presionPico+'</td>'
-					+'<td>'+pac.presionMeseta+'</td>'
-					+'<td>'+pac.peep+'</td>'
-					+'<td>'+pac.fio2+'</td>'
-					+'<td>'+pac.poderMecanico+'</td>'
-					+'<td>'+pac.vt2+'</td>'
-					+'<td>'+pac.create_at+'</td>'
-				+'</tr>';
-			});
 
-			$('#tableHistory tbody').html(body);
-			
-			$('#tableHistory').DataTable({
-				"language": {
-                	"url": "../assets/DataTables/Spanish.json"
-            	},
-        		"order": [[ 11, "desc" ]],
-        		responsive: true
-    		});
-    		*/
+//añadido borrar el collapse		
+$('body').on('click', '.delete-paciente', function(ev){
+	var active = $(this);
+	var expediente = active.data('exp');
 
+	swal({
+	  title: '¡Eliminar!',
+	  text: "¿Deseas borrar el expediente " + expediente +"?",
+	  type: 'warning',
+	  showCancelButton: true,
+	  confirmButtonColor: '#3085d6',
+	  cancelButtonColor: '#d33',
+	  confirmButtonText: 'Si, borralo',
+	  cancelButtonText: 'No, detente'
+	}).then((result) => {
+	  if (result.value) {
 
+	  	$.ajax({
+			url: '../modelo/Peticiones',
+			type: 'POST',
+			dataType: 'json',
+			data: {'fn': 'deleteExpediente', 'expediente': expediente}
+		}).done(function(resp){
+			console.log(resp);
+			swal(
+		      'Eliminado',
+		      'El expediente a sido eliminado',
+		      'success'
+		    )
+		    tablaExp.row( active.parents('tr') ).remove().draw();
+		}).fail(function(){
+			console.log("Fallo la ejecucion del ajax");
+			swal(
+		      '¡Uppss!',
+		      'Tuvimos un error al eliminar el expediente, verificalo e intenta nuevamente, gracias',
+		      'info'
+		    )
+		    tablaExp.draw();
+		});
+	    
+	  }
+	})
+
+	
+
+})
 
 		}).fail(function() {
 			console.log("error");
@@ -416,19 +437,72 @@ var addShowCollapse = function(){
 					+'<td>'+pac.poderMecanico+'</td>'
 					+'<td>'+pac.vt2+'</td>'
 					+'<td>'+pac.create_at+'</td>'
+					+'<td> <button class="btn btn-danger btn-sm delete-row" type="button" data-row="'+pac.id_paciente+'"> <i class="fas fa-times"></i> </button> </td>'
 				+'</tr>';
 			});
 
 			$('#'+idCollapse + ' table tbody').html(body);
 
-			$('#'+idCollapse + ' table').DataTable({
+			var tablaRows = $('#'+idCollapse + ' table').DataTable({
 				"language": {
 	            	"url": "../assets/DataTables/Spanish.json"
 	        	},
 	    		"order": [[ 11, "desc" ]],
 	    		responsive: true
 			});
-	
+			
+//añado el evento de borrar
+$('body').on('click', '.delete-row', function(ev){
+
+
+	var active = $(this);
+	var row = active.data('row');
+
+	swal({
+	  title: '¡Eliminar!',
+	  text: "¿Deseas borrar el expediente registro?",
+	  type: 'warning',
+	  showCancelButton: true,
+	  confirmButtonColor: '#3085d6',
+	  cancelButtonColor: '#d33',
+	  confirmButtonText: 'Si, borralo',
+	  cancelButtonText: 'No, detente'
+	}).then((result) => {
+	  if (result.value) {
+
+	  	$.ajax({
+			url: '../modelo/Peticiones',
+			type: 'POST',
+			dataType: 'json',
+			data: {'fn': 'deleteRow', 'row': row}
+		}).done(function(resp){
+			console.log(resp);
+			swal(
+		      'Eliminado',
+		      'El expediente a sido eliminado',
+		      'success'
+		    )
+
+			tablaRows.row( active.parents('tr') ).remove().draw();
+
+		}).fail(function(){
+			console.log("Fallo la ejecucion del ajax");
+			swal(
+		      '¡Uppss!',
+		      'Tuvimos un error al eliminar el expediente, verificalo e intenta nuevamente, gracias',
+		      'info'
+		    )
+
+		    tablaRows.draw();
+		});
+	    
+	  }
+	})
+
+})
+
+
+
 
 		}).fail(function(){
 			console.log("Fallo la ejecucion del ajax");
@@ -439,3 +513,93 @@ var addShowCollapse = function(){
 	});
 
 }
+
+$('body').on('click', '.delete-paciente', function(ev){
+	var active = $(this);
+	var expediente = active.data('exp');
+
+	swal({
+	  title: '¡Eliminar!',
+	  text: "¿Deseas borrar el expediente " + expediente +"?",
+	  type: 'warning',
+	  showCancelButton: true,
+	  confirmButtonColor: '#3085d6',
+	  cancelButtonColor: '#d33',
+	  confirmButtonText: 'Si, borralo',
+	  cancelButtonText: 'No, detente'
+	}).then((result) => {
+	  if (result.value) {
+
+	  	$.ajax({
+			url: '../modelo/Peticiones',
+			type: 'POST',
+			dataType: 'json',
+			data: {'fn': 'deleteExpediente', 'expediente': expediente}
+		}).done(function(resp){
+			console.log(resp);
+			swal(
+		      'Eliminado',
+		      'El expediente a sido eliminado',
+		      'success'
+		    )
+		}).fail(function(){
+			console.log("Fallo la ejecucion del ajax");
+			swal(
+		      '¡Uppss!',
+		      'Tuvimos un error al eliminar el expediente, verificalo e intenta nuevamente, gracias',
+		      'info'
+		    )
+		});
+	    
+	  }
+	})
+
+	
+
+})
+
+/*
+$('body').on('click', '.delete-row', function(ev){
+	var active = $(this);
+	var row = active.data('row');
+
+	swal({
+	  title: '¡Eliminar!',
+	  text: "¿Deseas borrar el expediente registro?",
+	  type: 'warning',
+	  showCancelButton: true,
+	  confirmButtonColor: '#3085d6',
+	  cancelButtonColor: '#d33',
+	  confirmButtonText: 'Si, borralo',
+	  cancelButtonText: 'No, detente'
+	}).then((result) => {
+	  if (result.value) {
+
+	  	$.ajax({
+			url: '../modelo/Peticiones',
+			type: 'POST',
+			dataType: 'json',
+			data: {'fn': 'deleteRow', 'row': row}
+		}).done(function(resp){
+			console.log(resp);
+			swal(
+		      'Eliminado',
+		      'El expediente a sido eliminado',
+		      'success'
+		    )
+
+
+		}).fail(function(){
+			console.log("Fallo la ejecucion del ajax");
+			swal(
+		      '¡Uppss!',
+		      'Tuvimos un error al eliminar el expediente, verificalo e intenta nuevamente, gracias',
+		      'info'
+		    )
+		});
+	    
+	  }
+	})
+
+})
+*/
