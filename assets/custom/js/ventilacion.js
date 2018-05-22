@@ -37,10 +37,10 @@ $('.infoExp').DataTable({
 	var myChart = new Chart(ctx, {
     	type: 'radar',
     	data: {
-		    labels: ['Poder Mecánico', 'FiO2', 'Volumen Tidal', 'Driving Pressure', 'Presión Pico', 'Presión Meseta', 'PEEP'],
+		    labels: ['Poder Mecánico', 'FiO2', 'Volumen Tidal', 'Driving Pressure', 'Presión Pico', 'Presión Meseta'],
 		    datasets: [{
 		    	label: "Limite Min Recomendado",
-		        data: [13, 21, 8, 15, 35, 29, 5],
+		        data: [13, 21, 8, 15, 35, 29],
 		        backgroundColor: [
 	            	'transparent'
 	            ],
@@ -48,11 +48,16 @@ $('.infoExp').DataTable({
 	            	'rgba(0, 255, 0, 1)'
 	            ],
 	            borderWidth: 1,
-	            radius: 6
+	            radius: 6,
+	            pointRadius: 6,
+			    pointBorderWidth: 3,
+			    pointBackgroundColor: "rgba(0,100,0,.5)",
+			    pointBorderColor: "rgba(0,200,0,0.6)",
+			    pointHoverRadius: 10
 		    },
 		    {
 		    	label: "Limite Max Recomendado",
-		        data: [13, 60, 8, 15, 35, 29, 5],
+		        data: [13, 60, 8, 15, 35, 29],
 		        backgroundColor: [
 	            	'transparent'
 	            ],
@@ -60,7 +65,29 @@ $('.infoExp').DataTable({
 	            	'rgba(0, 0, 255, 1)'
 	            ],
 	            borderWidth: 1,
-	            radius: 6
+	            radius: 6,
+	            pointRadius: 6,
+			    pointBorderWidth: 3,
+			    pointBackgroundColor: "rgba(0,0,100, .5)",
+			    pointBorderColor: "rgba(0,0,200,0.6)",
+			    pointHoverRadius: 10
+		    },
+		    {
+		    	label: "PEEP > 4cmH2O",
+		        data: [5, 5, 5, 5, 5, 5],
+		        backgroundColor: [
+	            	'transparent'
+	            ],
+	            borderColor: [
+	            	'rgba(200, 100, 50, 1)'
+	            ],
+	            borderWidth: 1,
+	            radius: 1,
+	            pointRadius: 2,
+			    pointBorderWidth: 2,
+			    pointBackgroundColor: "rgba(100,0,0,.5)",
+			    pointBorderColor: "rgba(200,0,0,0.6)",
+			    pointHoverRadius: 4
 		    }]
 		},
     	options: {
@@ -68,10 +95,21 @@ $('.infoExp').DataTable({
             	display: true,
             	text: 'Reporte del Paciente'
         	},
-        	scale: {
-		        // Hides the scale
-		        display: true
-		    }
+			scale: {
+			    ticks: {
+			      beginAtZero: true,
+			      //min: 0,
+			      //max: 100,
+			      //stepSize: 20
+			    },
+			    pointLabels: {
+			      	fontSize: 18
+			    }
+			},
+			legend: {
+			    position: 'left'
+			}
+
     	}
 	});
 
@@ -133,7 +171,7 @@ $('.infoExp').DataTable({
 
 					var radarPaciente = {
 				    	label: "Paciente",
-				        data: [poderMecanico, fio2, tidal, driving, pico, presionMeseta, peep],
+				        data: [poderMecanico, fio2, tidal, driving, pico, presionMeseta],
 				        backgroundColor: [
 			            	'rgba(0, 0, 0, .1)'
 			            ],
@@ -141,32 +179,57 @@ $('.infoExp').DataTable({
 			            	'rgba(0, 0, 0, 1)'
 			            ],
 			            borderWidth: 1,
-			            radius: 2
+			            radius: 6,
+			            pointRadius: 6,
+					    pointBorderWidth: 3,
+					    pointBackgroundColor: "rgba(0,0,0, .5)",
+					    pointBorderColor: "rgba(0,0,0,0.6)",
+					    pointHoverRadius: 10
 					}
-				    myChart.data.datasets[2] = radarPaciente;
+				    myChart.data.datasets[3] = radarPaciente;
+				    var radarPeep = {
+				    	label: "PEEP Paciente",
+				        data: [peep, peep, peep, peep, peep, peep],
+				        backgroundColor: [
+			            	'rgba(0, 200, 185, .2)'
+			            ],
+			            borderColor: [
+			            	'rgba(0, 200, 185, 1)'
+			            ],
+			            borderWidth: 1,
+			            radius: 1,
+			            pointRadius: 2,
+					    pointBorderWidth: 2,
+					    pointBackgroundColor: "rgba(0,200,185,.5)",
+					    pointBorderColor: "rgba(0,220,200,0.6)",
+					    pointHoverRadius: 4
+					}
+					myChart.data.datasets[4] = radarPeep;
+
+
 				    myChart.update();
 					
-				    var table = '<table class="table table-sm table-bordered my-3">'+
+				    var table = '<table class="table table-sm table-bordered my-3 text-center">'+
 						'<tbody>'+
 							'<tr>'+
 								'<th>Poder Mecánico</th>'+
-								'<td>'+poderMecanico+'</td>'+
-								'<th>FIO2</th>'+
-								'<td>'+ fio2 +'</td>'+
+								'<td>'+poderMecanico+' Joules </td>'+
+								'<th>FIO<sub>2</sub></th>'+
+								'<td>'+ fio2 +' % </td>'+
 								'<th>Volumen Tidal</th>'+
-								'<td>'+tidal+'</td>'+
+								'<td>'+tidal+' ml/Kg </td>'+
 							'</tr>'+
 							'<tr>'+
 								'<th>Driving Pressure</th>'+
-								'<td>'+driving+'</td>'+
+								'<td>'+driving+' cmH<sub>2</sub>O </td>'+
 								'<th>Presión Pico</th>'+
-								'<td>'+pico+'</td>'+
+								'<td>'+pico+' cmH<sub>2</sub>O </td>'+
 								'<th>Presión Meseta</th>'+
-								'<td>'+presionMeseta+'</td>'+
+								'<td>'+presionMeseta+' cmH<sub>2</sub>O </td>'+
 							'</tr>'+
 							'<tr>'+
 								'<th>PEEP</th>'+
-								'<td>'+peep+'</td>'+
+								'<td>'+peep+' cmH<sub>2</sub>O </td>'+
 							'</tr>'+
 						'</tbody>'+
 					'</table>';

@@ -39,12 +39,12 @@
 		      	
 		      	<div class="col">
 					<p class="lead">
-						Para terminar con el reporte del paciente por favor ingrese el <b>FIO2</b>
+						Para terminar con el reporte del paciente por favor ingrese el <b>FIO<sub>2</sub></b>
 					</p>
 					<form action="#" method="GET" accept-charset="utf-8" role="formulario" id="form-fio2">
 						
 						<div class="form-group">
-							<label for="fio2">FIO2</label>
+							<label for="fio2">FIO<sub>2</sub></label>
 							<div class="input-group">
 								<input type="number" name="fio2" class="form-control" id="fio2" placeholder="Ingresa el FIo2" min="21" max="100" step="0.01" required />
 								<div class="input-group-append">

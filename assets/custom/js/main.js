@@ -1,5 +1,6 @@
 var ctx = document.querySelector("#myGraf");
 var myChart;
+
 $(function(){
 	$('[data-toggle="tooltip"]').tooltip();
 
@@ -83,21 +84,10 @@ $(function(){
 			$('#pico').parent().siblings('div.alert').slideUp();
 		}
 	});
-//ajax que rescata los datos y calcula el IMC
-	$.ajax({
-		url: '../modelo/Peticiones',
-		type: 'POST',
-		dataType: 'json',
-		data: {fn: 'getPaciente'}
-	}).done(function(json){
-		//console.log("success");
-		//console.log( typeof json[0] );
-		
-		if( typeof json[0] === 'undefined'  ){
-			window.location.href = "../index";
-		}
 
-		var paciente = json[0];
+/////////////aqui empezaba el ajax
+		//var paciente = json[0];
+		var paciente = JSON.parse( window.localStorage.getItem('datos') );
 		var imc = calcularIMC(paciente.peso, paciente.estatura);
 		var pesoPredicho = calcularPesoPredicho(paciente.estatura, paciente.genero);
 		
@@ -124,7 +114,7 @@ $(function(){
 			contorno = 'red';	
 		}
 
-		var info = '<div class="p-2 rounded bg-gradient-secondary text-white">'+
+		var info = '<div class="p-2 rounded bg-gradient-primary text-white">'+
 			'<h3>Datos del Paciente</h3>'+
 			'<p><b>Estatura: </b>'+ paciente.estatura + 'cm</p>'+ 
 			'<p><b>Peso: </b>'+ paciente.peso + 'Kg</p>'+
@@ -168,22 +158,23 @@ $(function(){
 	});
 
 
-	}).fail(function() {
-		//console.log("error");
-	});
-
 	$('#formPoderMecanico').submit(function(ev){
 		ev.preventDefault();
 		var valores = $(this).serializeArray();
 		var power = getPoderMecanico( valores[0].value, valores[1].value, valores[2].value, valores[3].value, valores[4].value, valores[5].value );
 		console.log(valores);
 		console.log("power", power);
-
-		//console.log(valores);
-
-		valores.push({name: 'fn', value: 'paso2'});
-		valores.push({name: 'poderMecanico', value: power});
-
+		
+		paciente.frecuenciaRespiratoria = valores[1].value;
+		paciente.vt = valores[2].value;
+		paciente.presionPico = valores[3].value;
+		paciente.presionMeseta = valores[4].value;
+		paciente.peep = valores[5].value;
+		paciente.poderMecanico = power;
+		paciente.vt2 = valores[6].value;
+		window.localStorage.setItem('datos', JSON.stringify(paciente));
+		
+		/*
 		$.ajax({
 		url: '../modelo/Peticiones',
 		type: 'POST',
@@ -200,6 +191,7 @@ $(function(){
 			console.log("error");
 		});
 
+		*/
 		if(power > 13){
 			swal("Zona de Riesgo!!", "Nivel mecánico de "+ power, "warning");
 			alertify.error("Poder Mecánico Riesgoso!!");
@@ -207,21 +199,31 @@ $(function(){
 		}
 		else if(power <= 13){
 			swal("Poder Mecánico Estable!!", "Nivel mecánico de "+ power, "success");
-			alertify.success("Poder Mecánico Estable!!");
+			alertify.success("!Poder Mecánico Seguro!");
 
 		}
 
 		document.querySelector("#formPoderMecanico").reset();
 		$('#formPoderMecanico div.alert').slideUp();
-
+		/*
 		var html = "<b>Frecuencia Respiratoria:</b> " + valores[1].value + "<br>"
 		+ "<b>Volumen Tidal</b> " + valores[2].value + " <br>"
 		+ "<b>Presión Pico</b> " + valores[3].value + " <br>"
 		+ "<b>Meseta</b> " + valores[4].value + " <br>"
 		+ "<b>PEEP</b> " + valores[5].value + " <br>"
 		+ "<p class='bg-secondary rounded p-1 text-white'><b>PODER MECÁNICO</b> " + power + " </p><br>";
-		
-		$("#datosIngresados").html(html);
+		*/
+		var tabla = '<table class="table table-hover table-sm">'+
+			'<tbody>'+
+				'<tr> <th> Frecuencia Respiratoria </th> <td> ' + valores[1].value + ' rate </td> </tr>'+
+				'<tr> <th> Volumen Tidal </th> <td> ' + valores[2].value + ' ml </td> </tr>'+
+				'<tr> <th> Presión Pico </th> <td> ' + valores[3].value + ' cmH<sub>2</sub>O </td> </tr>'+
+				'<tr> <th> Presión Meseta </th> <td> ' + valores[4].value + ' cmH<sub>2</sub>O </td> </tr>'+
+				'<tr> <th> PEEP </th> <td> ' + valores[5].value + ' cmH<sub>2</sub>O </td> </tr>'+
+				'<tr> <th> Poder Mecánico </th> <td> ' + power + ' cmH<sub>2</sub>O </td> </tr>'+
+			'</tbody>'+
+		'</table>';
+		$("#datosIngresados").html(tabla);
 
 
 	});//ENd Submit

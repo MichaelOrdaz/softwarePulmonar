@@ -1,0 +1,31 @@
+<article id="carusel" class="text-center">
+	<!-- <a href="vista/datosPeso" class="btn btn-dark btn-lg d-none d-sm-block">Examinar Ventilación</a> -->
+	<a href="javascript://" onclick="cargar('vista/datosPeso')" class="btn btn-dark">Examinar Ventilación</a>
+</article>
+<article>
+	<h3>Ventilación Mecánica Segura</h3>
+	<p class="lead">
+		Es un software médico que ayuda al personal, para realizar calculos matematicos de manera fácil y eficiente
+		y diagnosticar rapidamente al paciente en temas de ventilacion pulmonar mecanica.
+	</p>
+</article>
+
+<script>
+	if(typeof timer !== 'undefined'){
+		clearInterval(timer);
+	}
+
+	var carusel = function(){
+		if(i == 2){
+			i = 0;
+		}
+		var album = ['welcome', 'welcome2'];
+		var nodo = document.querySelector('#carusel');
+		nodo.className = album[i];
+		i++;
+	}
+	var i = 0;
+	document.querySelector('#carusel').className = "welcome2";
+	
+	timer = setInterval(carusel, 1000*10)
+</script>

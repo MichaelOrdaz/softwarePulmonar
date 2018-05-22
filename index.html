@@ -11,22 +11,25 @@
 	
 </head>
 <body>
-<header class="d-flex justify-content-center">
-	Sistema de Ventilación Mecánica
-</header>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="javascript://" id="inicio" >Inicio</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="javascript://" id="diagnostico">Examinación</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
 <!-- /header -->
-<section>
-	<article id="carusel">
-		<a href="vista/datosPeso" class="btn btn-dark btn-lg d-none d-sm-block">Examinar Ventilación</a>
-		<a href="vista/datosPeso" class="btn btn-dark btn-sm d-block d-sm-none ">Examinar Ventilación</a>
-	</article>
-	<article>
-		<h3>Ventilación Mecánica Segura</h3>
-		<p>
-			Es un software médico que ayuda al personal, para realizar calculos matematicos de manera fácil y eficiente
-			y diagnosticar rapidamente al paciente en temas de ventilacion pulmonar mecanica. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus itaque culpa quisquam dignissimos ullam animi iure error, beatae accusantium eveniet nostrum ut corporis sint ducimus minima atque ratione accusamus ipsam?
-		</p>
-	</article>
+<section id="wrapper">
+	
 </section>
 
 <footer class="d-flex justify-content-center">
@@ -34,22 +37,33 @@
 </footer>
 
 <script src="assets/jquery/jquery-3.3.1.min.js" ></script>
+<script src="assets/popover/popover.js"></script>
 <script src="assets/bootstrap/js/bootstrap.min.js" ></script>
-<script>
-	var carusel = function(){
-		if(i == 2){
-			i = 0;
-		}
-		var album = ['welcome', 'welcome2'];
-		var nodo = document.querySelector('#carusel');
-		nodo.className = album[i];
-		i++;
-	}
-	var i = 0;
-	document.querySelector('#carusel').className = "welcome2";
+
+<script type="text/javascript">
 	window.onload = function(){
-		var timer = setInterval(carusel, 1000*10)
-	};
+		cargar('vista/main.html');
+	}
+
+	$('#diagnostico').on('click', function(){
+		//contraer navbar
+		$('[data-target=\'#navbarSupportedContent\']').trigger('click');
+		//cargar diagnostico
+		cargar('vista/datosPeso.html');
+	});
+	$('#inicio').on('click', function(){
+		//contraer navbar
+		$('[data-target=\'#navbarSupportedContent\']').trigger('click');
+		//cargar diagnostico
+		cargar('vista/main.html');
+	});
+
+
+
+	function cargar(url){
+		$('#wrapper').load(url)
+	}
 </script>
+
 </body>
 </html>

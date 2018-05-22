@@ -8,16 +8,33 @@ html{
 body{
 	margin: 0 0 4rem 0;
 }
-header{
-	height: 3rem;
-	position: absolute;
-	top: 0;
-	left: 0;
-	background: linear-gradient(45deg, #000, #373737);
-	color: #fff;
-	width: 100vw;
-	line-height: 3;
+
+#wrapper{
+
+	margin-top: 3.5rem;
 }
+
+#prevData>div{
+	box-shadow: 0 0 4px 0 black;
+}
+
+#btnNext{
+	text-align: center;
+	vertical-align: middle;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	z-index: 100;
+	position: fixed;
+	right: 1.5rem;
+	bottom: 3rem;
+	box-shadow: 0 0 6px 0 black;
+	transition: transform 1s;
+}
+#btnNext:hover{
+	transform: scale(1.1);
+}
+
 .welcome{
 	position: relative;
 	background: url("../../img/welcome.jpg");
@@ -38,10 +55,9 @@ header{
 	border-radius: 6px;
 	box-shadow: 0 0 4px black;
 }
-#carusel a{
-	position: absolute;
-	top: 48%;
-	left: 40%;
+#carusel{
+	text-align: center;
+	line-height: 20;
 }
 
 
@@ -61,4 +77,5 @@ footer{
 	text-align: center;
 	line-height: 2;
 	color: #fff;
+	box-shadow: 0 -2px 4px black;
 }

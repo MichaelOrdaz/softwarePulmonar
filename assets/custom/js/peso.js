@@ -1,40 +1,67 @@
-$(function(){
+clearInterval(timer);
 
-	$('#pesoPredicho').submit(function(ev){
-		ev.preventDefault();
-		var datos = $(this).serializeArray();
-		document.querySelector("#pesoPredicho").reset();
+document.querySelector('#peso').focus();
 
-		datos.push({name: 'fn', value: 'paso1'}); 
-		console.log( datos );
+$('#pesoPredicho').submit(function(ev){
+	ev.preventDefault();
+	var data = $(this).serializeArray();
+	document.querySelector("#pesoPredicho").reset();
+
+	var datos = {
+		peso: data[0].value,
+		estatura: data[1].value,
+		genero: data[2].value
+	}
+
+	window.localStorage.setItem('datos', JSON.stringify( datos ));
+
+
+	swal({
+	  title: 'Espere por favor',
+	  onOpen: () => {
+	    swal.showLoading()
+	  },
+	  allowOutsideClick: false
+	})
+
+	setTimeout(()=>{
+		swal.close();
+		cargar('vista/poderMecanico');
+	}, 1500);
+
+
+
 		
-		$.ajax({
-			url: '../modelo/Peticiones',
-			type: 'POST',
-			dataType: 'json',
-			data: datos,
-			beforeSend: function(){
-				swal({
-				  title: 'Espere por favor',
-				  onOpen: () => {
-				    swal.showLoading()
-				  },
-				  allowOutsideClick: false
-				})
-			}
-		}).done(function(json){
-			
-			//console.log("success");
-			//console.log(json);
-			swal.close();
-			setTimeout(()=>{
-				window.location.href = "poderMecanico";
-			}, 1000);
+	/*
+	datos.push({name: 'fn', value: 'paso1'}); 
+	console.log( datos );
+	$.ajax({
+		url: '../modelo/Peticiones',
+		type: 'POST',
+		dataType: 'json',
+		data: datos,
+		beforeSend: function(){
+			swal({
+			  title: 'Espere por favor',
+			  onOpen: () => {
+			    swal.showLoading()
+			  },
+			  allowOutsideClick: false
+			})
+		}
+	}).done(function(json){
 		
-		}).fail(function() {
-			swal.close();
-			console.log("error");
-		});
-		
+		//console.log("success");
+		//console.log(json);
+		swal.close();
+		setTimeout(()=>{
+			window.location.href = "poderMecanico";
+		}, 1000);
+	
+	}).fail(function() {
+		swal.close();
+		console.log("error");
 	});
+	*/
+	
 });
